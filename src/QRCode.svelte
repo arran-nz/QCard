@@ -1,33 +1,32 @@
 <style>
-
+    img {
+        width:100%;
+    }
 
 </style>
 
 <script>
 
-import {  QRCode } from "qrcode.min.js";
+import QRCode from './plugins/qr.js';
 
+let src;
 
-function renderQRCode(text_content){
-    var qrcode = new QRCode({
-    color: "#364958",
-    content: text_content,
-    container: "svg-viewbox", //Responsive use
-    join: true //Crisp rendering and 4-5x reduced file size
-    });
-    var svg = qrcode.svg();
-    document.getElementById("qr_render").innerHTML = svg;
+export let dataToEncode;
+export let qrOptions = {
+            margin: 5,
+            modulesize: 15
+        }
+
+// Reactive to any variable changes in this component
+$: {
+    console.log("Updated QRCode");
+    src = QRCode.generatePNG(
+        dataToEncode,
+        qrOptions
+    );
 }
-
-renderQRCode("this");
 
 </script>
 
 
-
-<article>    
-       <div id="qr_render">
-
-       </div>
-
-</article>
+<img {src} alt="QRCode"/>

@@ -169,6 +169,9 @@
 </style>
 
 <script>
+	import QRCode from './QRCode.svelte';
+	import { generateVCardString } from './plugins/vcard.js';
+
 	export let name;
 	export let title;
 	export let email
@@ -178,11 +181,28 @@
 
 	// Remove the protocol from the address
 	let websiteDisplay = website.replace(/(^\w+:|^)\/\//, '');
+
+	let vCardString;
+	$: {
+		console.log("Updated vCard String");
+		vCardString = generateVCardString(
+			{
+				"n": [
+					{
+						'value': name,
+					}
+				]
+			},
+			true
+		);
+	}
+
 </script>
 
 
 <article class="contact-card">
 
+	<QRCode dataToEncode = {vCardString}/>
 
 	<header>
 
