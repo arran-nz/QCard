@@ -149,7 +149,9 @@
 
 <article class="contact-card">
 
-	<QRCode dataToEncode = {vCardString}/>
+	{#if vCardString}
+		<QRCode dataToEncode = {vCardString}/>
+	{/if}
 
 	<header>
 
