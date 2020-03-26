@@ -75,20 +75,74 @@
 	// Remove the protocol from the address
 	let websiteDisplay = website.replace(/(^\w+:|^)\/\//, '');
 
+	let vCardObj = {};
 	let vCardString;
+
+	// Reactive to any variable changes in this component
 	$: {
-		console.log("Updated vCard String");
+
+		setVCardProperty("n", name);
+		setVCardProperty("title", title);
+		setVCardProperty("email", email);
+		setVCardProperty("tel", phone);
+		setVCardProperty("url", website);
+		setVCardProperty("note", comment);
+		
 		vCardString = generateVCardString(
-			{
-				"n": [
-					{
-						'value': name,
-					}
-				]
-			},
-			true
+			vCardObj,
+			false
 		);
-	}
+	};
+
+	function setVCardProperty(key, value){
+		vCardObj[key] = [
+			{
+				'value': value,
+			}
+		]		
+	};
+
+	function setVCardPropertyByMeta(key, metaName, value){
+		var new_object = {
+			'value': value,
+			'meta': {
+				"type":[ metaName ]
+			}
+		};
+
+		// Does the item have `key`,
+		// and is that item an array?
+		if (vCardObj.hasOwnProperty(key) 
+			&& Array.isArray(vCardObj[key])) {
+
+				// Loop over each key
+				for (var index in vCardObj[key]){
+					
+					var element = vCardObj[key][index];
+
+					// Has the match been found
+					var found = false;
+					// Loop over each meta type
+					for (var typeIndex in element.meta.type){
+						var type = element.meta.type[typeIndex];
+						// If the type matches the specced metaName, set the value.
+						if (type == metaName){
+							element.value = value;
+							found = true;
+						}
+					} 
+				} 
+				// If a match has not been found, push the new object into the array.
+				if (!(found)){
+					vCardObj[key].push(new_object);
+				}
+			}
+		else{
+			// If the vCardObject does not have the `key`
+			// Fill it with an array of one object.
+			vCardObj[key] = [new_object];
+		}
+	};
 
 </script>
 
