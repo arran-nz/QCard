@@ -13,20 +13,22 @@
 		comment: "",
 	};
 
-
 </script>
 
 <AppHeader/>
 
 
-<CreateForm on:Submitted = { event =>
-    {
-    	contactDetails = event.detail;
-    }
-  }
+<CreateForm 
+	on:Submitted = { 
+		event =>
+		{
+    		contactDetails = event.detail;
+		}
+	}
 />
 
 
+{#if contactDetails.name != ""}
 <ContactCard 
 	name = {contactDetails.name}
 	title = {contactDetails.title}
@@ -35,6 +37,8 @@
 	website = {contactDetails.website}
 	comment = {contactDetails.comment}
 />
+{/if}
+
 
 
 <Sponsors />
