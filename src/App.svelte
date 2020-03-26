@@ -5,12 +5,12 @@
 	import Sponsors from './Sponsors.svelte';
 
 	let contactDetails = {
-		name: "Arran Smith",
-		title: "Developer",
-		email: "social@arran.nz",
-		phone: "+555 555 555",
-		website: "https://arran.nz",
-		comment: "I like beaches",
+		name: "",
+		title: "",
+		email: "",
+		phone: "",
+		website: "",
+		comment: "",
 	};
 
 
