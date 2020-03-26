@@ -3,7 +3,6 @@
 	import CreateForm from './CreateForm.svelte';
 	import AppHeader from './AppHeader.svelte';
 	import Sponsors from './Sponsors.svelte';
-	// import QRCode from './QRCode.svelte';
 
 	let contactDetails = {
 		name: "Arran Smith",
@@ -19,10 +18,12 @@
 
 <AppHeader/>
 
-<CreateForm on:Submitted = { event => 
-	{ 
-		contactDetails = event.detail;
-	}}
+
+<CreateForm on:Submitted = { event =>
+    {
+    	contactDetails = event.detail;
+    }
+  }
 />
 
 
