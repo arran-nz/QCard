@@ -1,5 +1,6 @@
 <style>
     img {
+        max-width: 1024px;
         width:100%;
     }
 
