@@ -1,5 +1,13 @@
 <style>
 
+	article {
+		width: 100%;	
+		margin: 0 auto;
+		max-width: 1000px;
+		min-width: 250px;	
+		text-align: left;
+	}
+
 	label.required:after{
 		color: #ff3e00;
 		content: " *";
@@ -9,13 +17,8 @@
 		border: 0;
 	}
 
-	.create-form {
-		width: 100%;		
-		text-align: left;
-	}
-
 	.button-submit {
-
+		margin: 0;
 		font-weight: 800;
 		font-size: 1.5em;
 
@@ -35,9 +38,13 @@
 		border-radius: 5px;
 	}
 
+	textarea {
+		height: 50px;
+	}
+
 	label {
 		text-align: left;
-		font-weight: 00;
+		font-weight: 400;
 		font-size: 1.3em;
 		padding: 0.3em 0 0.2em 0;
 		width: 100%;
@@ -66,7 +73,7 @@
 	}
 </script>
 
-<article class="create-form">
+<article>
 	<form on:submit|preventDefault="{handleSubmit}">
 		<fieldset>
 			<label class="required" for="nameField">Name</label>
