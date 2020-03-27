@@ -1,3 +1,16 @@
+<style>
+
+article {
+	margin: 0 auto;
+	max-width: 1600px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+</style>
+
+
 <script>
 	import ContactCard from './ContactCard.svelte';
 	import CreateForm from './CreateForm.svelte';
@@ -17,6 +30,7 @@
 
 <AppHeader/>
 
+<article>
 
 <CreateForm 
 	on:Submitted = { 
@@ -39,11 +53,15 @@
 />
 {/if}
 
-
+</article>
 
 <Sponsors />
 
+
+
+
 <svelte:head>
+  <title>QCard.now.sh - Contact Sharing</title>
   <script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
 </svelte:head>
 <img src="https://api.simpleanalytics.io/hello.gif" alt="">
