@@ -1,8 +1,12 @@
 <style>
-    img {
-        max-width: 1024px;
-        width:100%;
-    }
+  #container {
+    display: flex;
+		justify-content: center;
+}
+
+  img {
+    max-width: 420px;
+  }
 
 </style>
 
@@ -14,8 +18,8 @@ let src;
 
 export let dataToEncode;
 export let qrOptions = {
-            margin: 5,
-            modulesize: 15
+            margin: 2,
+            modulesize: 10
         }
 
 // Reactive to any variable changes in this component
@@ -29,5 +33,6 @@ $: {
 
 </script>
 
-
-<img {src} alt="QRCode"/>
+<div id="container">
+  <img {src} alt="QRCode"/>
+</div>
