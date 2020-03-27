@@ -27,11 +27,24 @@
         font-size: 1.2em;
     }
 
+    a {
+        text-decoration: none;
+    }
+
+
 </style>
 
-<article>
+<script>
 
+let windowLocation = window.location.href;
+
+</script>
+
+<article>
+  
+  <a href={windowLocation} alt="QCard main page">
     <h1><strong>QCard</strong>.now.sh</h1>
+  </a>
 
     <p>
         The minimalist, fast and <strong>private</strong> way to share contact information. 
