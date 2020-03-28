@@ -5,6 +5,9 @@
 }
 
   img {
+    /* Reduce the margin based on the width of the screen:
+    A bigger QRCode is important when screen realestatic is limited. */
+    margin: 1vw;
     max-width: 420px;
   }
 
@@ -18,7 +21,7 @@ let src;
 
 export let dataToEncode;
 export let qrOptions = {
-            margin: 2,
+            margin: 0,
             modulesize: 10
         }
 
