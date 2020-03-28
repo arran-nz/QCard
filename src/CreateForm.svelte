@@ -39,7 +39,7 @@
 	}
 
 	textarea {
-		height: 50px;
+		height: 100px;
 	}
 
 	label {
