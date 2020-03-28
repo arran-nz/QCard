@@ -36,7 +36,7 @@
 
 <script>
 
-let windowLocation = window.location.href;
+    let windowLocation = window.location.href.split('?')[0];
 
 </script>
 
@@ -46,8 +46,8 @@ let windowLocation = window.location.href;
     <h1><strong>QCard</strong>.now.sh</h1>
   </a>
 
-    <p>
-        The minimalist, fast and <strong>private</strong> way to share contact information. 
-    </p>
+  <p>
+      The minimalist, fast and <strong>private</strong> way to share contact information. 
+  </p>
 
 </article>

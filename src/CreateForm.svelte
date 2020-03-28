@@ -1,13 +1,5 @@
 <style>
 
-	article {
-		width: 100%;	
-		margin: 0 auto;
-		max-width: 1000px;
-		min-width: 250px;	
-		text-align: left;
-	}
-
 	label.required:after{
 		color: #ff3e00;
 		content: " *";

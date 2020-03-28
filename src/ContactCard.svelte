@@ -1,15 +1,11 @@
 <style>
-	article {
+	#card {
 		padding: 1em;
 		border-radius: 5px;
 
 		-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
 		-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
 		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-
-		margin: 0 auto;
-		max-width: 420px;
-		min-width: 250px;
 	}
 
 	h1 {
@@ -28,15 +24,6 @@
 
 	header {
 		margin-bottom: 0.5em;
-	}
-
-	a {
-		font-size: 1.2em;
-		color:inherit;
-	}
-
-	a:hover{
-		color: #ff3e00;
 	}
 
 	p {
@@ -64,6 +51,36 @@
 		justify-content: space-evenly;
 	}
 
+	ul.contact-copy {
+		margin: 1em;
+		list-style-type: none;
+		padding: 0;
+
+	}
+
+	ul.contact-copy li {
+		font-weight: 400;
+		letter-spacing: 2px;
+
+		margin: 0.5em 0;
+		padding: 0.5em; 
+
+		background-color: whitesmoke;
+		border-radius: 5px;
+		border: 1px solid #ccc;
+	}
+
+	ul.contact-copy li svg{
+		float: right;
+		height: 20px;
+		fill: #606c76;
+	}
+
+	a {
+		font-size: 1.2em;
+		color:inherit;
+	}
+
 	.info-slot {
 		margin: 15px;
 	}
@@ -72,7 +89,26 @@
 		min-width: 20px;
 		max-width: 45px;
 		width: 8vw;
+		transition-duration: 0.3s;
 	}
+
+	a:hover svg{
+		fill: #ff3e00;
+		transform: scale(1.25);
+	}
+
+	.create-footer-link {
+		margin: 1em;
+		display:block;
+		font-size: 0.8em;
+		font-weight: 300;
+		text-align: right;
+	}
+
+	.create-footer-link strong {
+		color: #ff3e00;
+		font-weight: 600;
+	}	
 
 </style>
 
@@ -87,11 +123,15 @@
 	export let website;
 	export let comment;
 
-	// Remove the protocol from the address
-	let websiteDisplay = website.replace(/(^\w+:|^)\/\//, '');
+	export let loadedExternalVCard;
+
+	let showRawData = false;
 
 	let vCardObj = {};
 	let vCardString;
+
+	let baseUrl = window.location.href.split('?')[0];
+	let selfLink;
 
 	// Reactive to any variable changes in this component
 	$: {
@@ -107,6 +147,8 @@
 			vCardObj,
 			false
 		);
+
+		selfLink = getSelfLink();
 	};
 
 	function setVCardProperty(key, value){
@@ -117,53 +159,53 @@
 		]		
 	};
 
-	function setVCardPropertyByMeta(key, metaName, value){
-		var new_object = {
-			'value': value,
-			'meta': {
-				"type":[ metaName ]
-			}
-		};
+	function getSelfLink(){
+		var encodedVCard = encodeData(vCardString);
+		var selfLink = baseUrl + "?v=" + encodedVCard;
+		return selfLink;
+	}
 
-		// Does the item have `key`,
-		// and is that item an array?
-		if (vCardObj.hasOwnProperty(key) 
-			&& Array.isArray(vCardObj[key])) {
-
-				// Loop over each key
-				for (var index in vCardObj[key]){
-					
-					var element = vCardObj[key][index];
-
-					// Has the match been found
-					var found = false;
-					// Loop over each meta type
-					for (var typeIndex in element.meta.type){
-						var type = element.meta.type[typeIndex];
-						// If the type matches the specced metaName, set the value.
-						if (type == metaName){
-							element.value = value;
-							found = true;
-						}
-					} 
-				} 
-				// If a match has not been found, push the new object into the array.
-				if (!(found)){
-					vCardObj[key].push(new_object);
-				}
-			}
-		else{
-			// If the vCardObject does not have the `key`
-			// Fill it with an array of one object.
-			vCardObj[key] = [new_object];
-		}
-	};
+	function encodeData(str) {
+		return window.btoa(unescape(encodeURIComponent(str)));
+	}
 
 </script>
 
 <article>
-  {#if vCardString}
-		<QRCode dataToEncode = {vCardString}/>
+<div id="card">
+  	{#if selfLink && !showRawData}
+		<a href={selfLink}><QRCode dataToEncode = {selfLink}/></a>
+	{:else}
+		<ul class="contact-copy">
+
+			{#if name}
+			<li>
+				{name}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="copy"><rect width="24" height="24" opacity="0"/><path d="M18 9h-3V5.67A2.68 2.68 0 0 0 12.33 3H5.67A2.68 2.68 0 0 0 3 5.67v6.66A2.68 2.68 0 0 0 5.67 15H9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3zm-9 3v1H5.67a.67.67 0 0 1-.67-.67V5.67A.67.67 0 0 1 5.67 5h6.66a.67.67 0 0 1 .67.67V9h-1a3 3 0 0 0-3 3z"/></g></g></svg>
+			</li>
+			{/if}
+			
+			{#if email}
+			<li>
+				{email}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="copy"><rect width="24" height="24" opacity="0"/><path d="M18 9h-3V5.67A2.68 2.68 0 0 0 12.33 3H5.67A2.68 2.68 0 0 0 3 5.67v6.66A2.68 2.68 0 0 0 5.67 15H9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3zm-9 3v1H5.67a.67.67 0 0 1-.67-.67V5.67A.67.67 0 0 1 5.67 5h6.66a.67.67 0 0 1 .67.67V9h-1a3 3 0 0 0-3 3z"/></g></g></svg>
+			</li>
+			{/if}
+
+			{#if phone}
+			<li>
+				{phone}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="copy"><rect width="24" height="24" opacity="0"/><path d="M18 9h-3V5.67A2.68 2.68 0 0 0 12.33 3H5.67A2.68 2.68 0 0 0 3 5.67v6.66A2.68 2.68 0 0 0 5.67 15H9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3zm-9 3v1H5.67a.67.67 0 0 1-.67-.67V5.67A.67.67 0 0 1 5.67 5h6.66a.67.67 0 0 1 .67.67V9h-1a3 3 0 0 0-3 3z"/></g></g></svg>
+			</li>
+			{/if}
+
+			{#if website}
+			<li>
+				{website}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="copy"><rect width="24" height="24" opacity="0"/><path d="M18 9h-3V5.67A2.68 2.68 0 0 0 12.33 3H5.67A2.68 2.68 0 0 0 3 5.67v6.66A2.68 2.68 0 0 0 5.67 15H9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3zm-9 3v1H5.67a.67.67 0 0 1-.67-.67V5.67A.67.67 0 0 1 5.67 5h6.66a.67.67 0 0 1 .67.67V9h-1a3 3 0 0 0-3 3z"/></g></g></svg>
+			</li>
+			{/if}
+		</ul>
 	{/if}
 
 	<header>
@@ -178,12 +220,11 @@
 
 	</header>
 
-
+	{#if email || phone || website}
 	<div class="contact-info">
-
 		{#if email}
 		<div class="info-slot">
-			<a href="mailto:{email}">
+			<a href="mailto:{email}" alt="{email}" target="_blank">
 
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<g data-name="Layer 2">
@@ -202,7 +243,7 @@
 
 		{#if phone}
 		<div class="info-slot">
-			<a href="tel:{phone}">
+			<a href="tel:{phone}" alt={phone}>
 
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 					<g data-name="Layer 2">
@@ -239,13 +280,25 @@
 			</a>
 		</div>
 		{/if}
-	
 	</div>
+	{/if}
 
-  {#if comment}
-  <div id="comment">
-    <p>{comment}</p>
-  </div>
+
+
+  	{#if comment}
+  	<div id="comment">
+    	<p>{comment}</p>
+  	</div>
+	{/if}
+
+</div>
+
+	{#if loadedExternalVCard}
+		<div class="create-footer-link">
+			<a href={baseUrl}>Create your own <strong>QCard</strong></a>
+		</div>
 	{/if}
 
 </article>
+
+
