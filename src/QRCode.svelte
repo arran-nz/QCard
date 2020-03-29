@@ -1,16 +1,7 @@
 <style>
-  #container {
-    display: flex;
-		justify-content: center;
-}
-
-  img {
-    /* Reduce the margin based on the width of the screen:
-    A bigger QRCode is important when screen realestatic is limited. */
-    margin: 1vw;
-    max-width: 420px;
-  }
-
+    img {
+        width: 100%;
+    }
 </style>
 
 <script>
@@ -36,6 +27,4 @@ $: {
 
 </script>
 
-<div id="container">
-  <img {src} alt="QRCode"/>
-</div>
+<img {src} alt="QRCode"/>
