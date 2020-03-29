@@ -41,7 +41,7 @@
 
 	hr {
 		border: 1px solid whitesmoke;
-		margin: 1em;
+		margin: 1em 0;
 	}
 
 	.contact-info {
@@ -96,6 +96,42 @@
 		fill: #ff3e00;
 		transform: scale(1.25);
 	}
+
+	div.button-container {
+		width: 100;
+		display: flex;
+		justify-content: flex-end;
+
+	}
+
+	button {
+		margin: 0 5px;
+		padding: 5px 30px;
+		font-weight: 600;
+		font-size: 1em;
+
+		border: 0;
+		border-radius: 5px;
+
+		cursor: pointer;
+	}
+
+	button svg {
+		min-width: 15px;
+		max-width: 25px;
+		width: 8vw;
+	}
+
+	button.download {
+		background-color: #ff3e00;
+		color: white;
+	}
+
+	button.download svg {
+		fill: white;
+	}
+
+
 
 	.create-footer-link {
 		margin: 1em;
@@ -169,12 +205,26 @@
 		return window.btoa(unescape(encodeURIComponent(str)));
 	}
 
+	function DownloadVCard(){
+		var fileName = name + ".vcf";
+		var downloadElement = document.createElement("a");
+		downloadElement.setAttribute("href", "data:text/vcard:charset=utf-8," + encodeURIComponent(vCardString));
+		downloadElement.setAttribute("download", fileName);
+		downloadElement.style.display = "none";
+
+		document.body.appendChild(downloadElement);
+		downloadElement.click();
+		document.body.removeChild(downloadElement);
+	}
+
 </script>
 
 <article>
 <div id="card">
   	{#if selfLink && !showRawData}
-		<a href={selfLink}><QRCode dataToEncode = {selfLink}/></a>
+		<a href={selfLink} alt="QRCard URL">
+			<QRCode dataToEncode = {selfLink}/>
+		</a>
 	{:else}
 		<ul class="contact-copy">
 
@@ -208,8 +258,9 @@
 		</ul>
 	{/if}
 
+	<hr>
+
 	<header>
-    <hr>
 		<h1>
 			{name}
 		</h1>
@@ -290,6 +341,42 @@
     	<p>{comment}</p>
   	</div>
 	{/if}
+
+	
+	<hr>
+
+	<div class="button-container">
+
+		<button alt="Share this QCard's URL">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<g data-name="Layer 2">
+					<g data-name="share">
+						<rect width="24" height="24" opacity="0" />
+						<path
+							d="M18 15a3 3 0 0 0-2.1.86L8 12.34V12v-.33l7.9-3.53A3 3 0 1 0 15 6v.34L7.1 9.86a3 3 0 1 0 0 4.28l7.9 3.53V18a3 3 0 1 0 3-3z" />
+					</g>
+				</g>
+			</svg>
+		</button>
+
+		<button on:click={DownloadVCard} class="download" alt="Download the VCard">
+			
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<g data-name="Layer 2">
+					<g data-name="download">
+						<rect width="24" height="24" opacity="0" />
+						<rect x="4" y="18" width="16" height="2" rx="1" ry="1" />
+						<rect x="3" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 5 18)" />
+						<rect x="17" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 19 18)" />
+						<path
+							d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39 1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z" />
+						<path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z" />
+					</g>
+				</g>
+			</svg>
+		</button>
+
+	</div>
 
 </div>
 
