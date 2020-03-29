@@ -31,6 +31,8 @@ article {
 
 
 <script>
+	import { fade } from 'svelte/transition';
+	
 	import ContactCard from './ContactCard.svelte';
 	import CreateForm from './CreateForm.svelte';
 	import AppHeader from './AppHeader.svelte';
@@ -108,7 +110,7 @@ article {
 </svelte:head>
 
 
-<article>
+<article transition:fade>
 
 {#if !loadedExternalVCard}
 <div id="app-header">
