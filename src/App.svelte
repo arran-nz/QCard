@@ -96,6 +96,9 @@ article {
   		<title>QCard.now.sh - Contact Sharing</title>
   	{/if}
 	  
+	<!-- Set Android Browser Tab Colour -->
+	<meta name="theme-color" content="#ff3e00">
+	
   	<script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
 </svelte:head>
 
