@@ -149,6 +149,8 @@
 </style>
 
 <script>
+	import { fly } from 'svelte/transition';
+
 	import QRCode from './QRCode.svelte';
 	import { generateVCardString } from './plugins/vcard.js';
 
@@ -162,6 +164,7 @@
 	export let loadedExternalVCard;
 
 	let showRawData = false;
+	let showCreateLink = false;
 
 	let vCardObj = {};
 	let vCardString;
@@ -231,7 +234,7 @@
 
 </script>
 
-<article>
+<article in:fly="{{ x: -100, duration: 600 }}" on:introend="{() => showCreateLink = true}">
 <div id="card">
   	{#if selfLink && !showRawData}
 		<a href={selfLink} alt="QRCard URL">
@@ -394,8 +397,8 @@
 
 </div>
 
-	{#if loadedExternalVCard}
-		<div class="create-footer-link">
+	{#if loadedExternalVCard && showCreateLink}
+		<div class="create-footer-link" in:fly="{{ y: -20, duration: 600, delay:1000 }}">
 			<a href={baseUrl}>Create your own <strong>QCard</strong></a>
 		</div>
 	{/if}
