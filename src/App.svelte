@@ -87,6 +87,10 @@ article {
 		loadedExternalVCard = true;
 	}
 
+	// sleep time expects milliseconds
+	function sleep (time) {
+		return new Promise((resolve) => setTimeout(resolve, time));
+	}
 
 </script>
 
@@ -117,6 +121,12 @@ article {
 			event =>
 			{
 				contactDetails = event.detail;
+				
+				// Must wait until the DOM object is rendered before scrolling.
+				sleep(50).then(() => {
+					document.getElementById("contact-card").scrollIntoView({ behavior: "smooth", block: "center" }); 
+				});
+
 			}
 		}
 	/>
