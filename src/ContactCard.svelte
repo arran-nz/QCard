@@ -216,6 +216,18 @@
 		downloadElement.click();
 		document.body.removeChild(downloadElement);
 	}
+	
+	function ShareQCard(){
+		if (navigator.share) {
+			navigator.share({
+				title: name + "'s QCard'",
+				text: "Here's " + {name} + "'s contact information",
+				url: selfLink,
+			})
+				.then(() => console.log('Successful share'))
+				.catch((error) => console.log('Error sharing', error));
+		}
+	}
 
 </script>
 
@@ -347,7 +359,8 @@
 
 	<div class="button-container">
 
-		<button alt="Share this QCard's URL">
+		{#if navigator.share}
+		<button on:click={ShareQCard} alt="Share this QCard's URL">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 				<g data-name="Layer 2">
 					<g data-name="share">
@@ -358,6 +371,7 @@
 				</g>
 			</svg>
 		</button>
+		{/if}
 
 		<button on:click={DownloadVCard} class="download" alt="Download the VCard">
 			
