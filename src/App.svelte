@@ -8,18 +8,18 @@ article {
 	justify-content: flex-start;
 }
 
-.app-header {
+#app-header {
 	width: 100%;
 }
 
-.create-form {
+#create-form {
 	margin: 1em 0;
 	width: 100%;	
 	max-width: 1000px;
 	min-width: 250px;	
 }
 
-.contact-card {
+#contact-card {
 	margin: 1em auto;
 	max-width: 420px;
 	min-width: 250px;
@@ -107,11 +107,11 @@ article {
 <article>
 
 {#if !loadedExternalVCard}
-<div class="app-header">
+<div id="app-header">
 	<AppHeader/>
 </div>
 
-<div class="create-form">
+<div id="create-form">
 	<CreateForm 
 		on:Submitted = { 
 			event =>
@@ -124,7 +124,7 @@ article {
 {/if}
 
 {#if contactDetails.name != ""}
-<div class="contact-card">
+<div id="contact-card">
 	<ContactCard 
 		name = {contactDetails.name}
 		title = {contactDetails.title}
