@@ -13,13 +13,14 @@ article {
 }
 
 .create-form {
+	margin: 1em 0;
 	width: 100%;	
 	max-width: 1000px;
 	min-width: 250px;	
 }
 
 .contact-card {
-	margin: 50px auto;
+	margin: 1em auto;
 	max-width: 420px;
 	min-width: 250px;
 }
@@ -98,7 +99,7 @@ article {
 	  
 	<!-- Set Android Browser Tab Colour -->
 	<meta name="theme-color" content="#ff3e00">
-	
+
   	<script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
 </svelte:head>
 
