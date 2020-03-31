@@ -6,6 +6,7 @@ article {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	flex-direction: row;
 }
 
 #app-header {
@@ -13,7 +14,7 @@ article {
 }
 
 #create-form {
-	margin: 1em 0;
+	margin: 1em auto;
 	width: 100%;	
 	max-width: 1000px;
 	min-width: 250px;	
@@ -116,7 +117,6 @@ article {
 <div id="app-header">
 	<AppHeader/>
 </div>
-
 <div id="create-form">
 	<CreateForm 
 		on:Submitted = { 
