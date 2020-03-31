@@ -199,6 +199,8 @@
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 
+	import Toast from 'svelte-toast'
+
 	import QRCode from './QRCode.svelte';
 	import { generateVCardString } from './plugins/vcard.js';
 
@@ -277,6 +279,30 @@
 				.then(() => console.log('Successful share'))
 				.catch((error) => console.log('Error sharing', error));
 		}
+	}
+
+	function CopySelfLink(){
+		// Thank you the World Wide Web <3
+		// https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
+		// Create new element
+		var el = document.createElement('textarea');
+		// Set value (string to be copied)
+		el.value = selfLink;
+		// Set non-editable to avoid focus and move outside of view
+		el.setAttribute('readonly', '');
+		el.style = { display: 'none', position: 'absolute'};
+		document.body.appendChild(el);
+		// Select text inside element
+		el.select();
+		// Copy text to clipboard
+		document.execCommand('copy');
+		// Remove temporary element
+		document.body.removeChild(el);
+
+		// Display Toast Notification to User.
+		var toast = new Toast();
+		toast.success('QCard URL Copied');
+
 	}
 
 </script>
@@ -422,7 +448,7 @@
 	<div class="button-container">
 
 		{#if navigator.share}
-		<button on:click={ShareQCard} alt="Share this QCard's URL">
+		<button on:click={ShareQCard} alt="Share this QCard's URL" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 				<g data-name="Layer 2">
 					<g data-name="share">
@@ -433,6 +459,10 @@
 				</g>
 			</svg>
 		</button>
+		{:else}
+			<button on:click={CopySelfLink} alt="Copy the URL of this QCard">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="copy"><rect width="24" height="24" opacity="0"/><path d="M18 9h-3V5.67A2.68 2.68 0 0 0 12.33 3H5.67A2.68 2.68 0 0 0 3 5.67v6.66A2.68 2.68 0 0 0 5.67 15H9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3zm-9 3v1H5.67a.67.67 0 0 1-.67-.67V5.67A.67.67 0 0 1 5.67 5h6.66a.67.67 0 0 1 .67.67V9h-1a3 3 0 0 0-3 3z"/></g></g></svg>
+			</button>
 		{/if}
 
 		<button on:click={DownloadVCard} class="download" alt="Download the VCard">
