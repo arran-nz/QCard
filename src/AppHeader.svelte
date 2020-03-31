@@ -32,24 +32,30 @@
         font-size: 1.2em;
     }
 
-    a {
-        text-decoration: none;
+
+    .reload {
+        cursor: pointer;
     }
 
 
 </style>
 
 <script>
+    // Import Event Dispatcher
+    import { createEventDispatcher } from 'svelte'
+    const dispatch = createEventDispatcher();
 
-    let windowLocation = window.location.href.split('?')[0];
+    function handleReloadRequest(){
+        dispatch("ReloadRequested");
+    }
 
 </script>
 
 <article>
   
-  <a href={windowLocation} alt="QCard main page">
+  <div class="reload" on:click={handleReloadRequest} alt="Reload the application">
     <h1><strong>QCard</strong>.now.sh</h1>
-  </a>
+  </div>
 
   <p>
       The minimalist, fast and <strong>private</strong> way to share contact information. 
