@@ -20,25 +20,25 @@
 		display: block;
 	}
 
-	.button-submit:hover{	
+	.button-submit:hover{
 		cursor: pointer;
 	}
 
 	input, textarea {
 		width: 100%;
-		padding: 0.6em;
+		padding: 0.5em;
 		border-radius: 5px;
 	}
 
 	textarea {
-		height: 100px;
+		height: 10vh;
 	}
 
 	label {
 		text-align: left;
 		font-weight: 400;
-		font-size: 1.3em;
-		padding: 0.3em 0 0.2em 0;
+		font-size: 1em;
+		padding: 0.2em 0;
 		width: 100%;
 	}
 </style>
