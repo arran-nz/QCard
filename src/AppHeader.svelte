@@ -1,7 +1,8 @@
 <style>
 
     h1, p {
-        color: #606c76;
+		color: #606c76;
+		text-align:center;
     }
 
 
@@ -14,9 +15,13 @@
         font-weight: 600;
     }
 
+    h1 strong {
+        font-size: 1.3em;
+    }
+
     h1 {
         margin: 0;
-        font-size: 3em;
+        font-size: 2em;
         font-weight: 500;
         line-height: 0.8em;
         
