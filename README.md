@@ -3,7 +3,7 @@
 QCard is a beautifully simple way to share contact information, here's why you should care:
 
 - 🎈 Super light-weight, coming in at only **~25 Kilobytes!**
-- 📖 Requires no backend, doesn't store data and run's 100% client-side.
+- 📖 Requires no backend, doesn't store data and runs 100% client-side.
 - 💚 Waste free alternative to Business Cards.
 
 ## What is a "QCard"?
