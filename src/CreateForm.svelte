@@ -57,7 +57,7 @@
 		{
 			name: form.target.nameField.value,
 			title: form.target.titleField.value,
-		  	email: form.target.emailField.value,
+		  email: form.target.emailField.value,
 			phone: form.target.phoneField.value,
 			website: form.target.webField.value,
 			comment: form.target.commentField.value
