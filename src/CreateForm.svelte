@@ -69,22 +69,22 @@
 	<form on:submit|preventDefault="{handleSubmit}">
 		<fieldset>
 			<label class="required" for="nameField">Name</label>
-			<input type="text" placeholder="Marco" id="nameField" required>
+			<input type="text" placeholder="Jaskier" id="nameField" required>
 
 			<label for="titleField">Title</label>
-			<input type="text" placeholder="Coin Tosser at Witcher's Feet" id="titleField">
+			<input type="text" placeholder="Singer, Poet, Lute Player" id="titleField">
 
 			<label for="emailField">Email</label>
-			<input type="text" placeholder="hey@marco.com" id="emailField">
+			<input type="text" placeholder="info@balladsfromjaskier.com" id="emailField">
 
 			<label for="phoneField">Phone</label>
-			<input type="tel" placeholder="+555" id="phoneField">
+			<input type="tel" placeholder="+0 000 000 000" id="phoneField">
 
 			<label for="webField">Website</label>
-			<input type="url" placeholder="https://marco.com" id="webField">
+			<input type="url" placeholder="https://thelute.com" id="webField">
 			
 			<label for="commentField">Comment</label>
-			<textarea placeholder="Senior coin tosser at.." id="commentField"></textarea>
+			<textarea placeholder="Yes, yes, yes. You never get involved. Except you actually do, all of the time." id="commentField"></textarea>
 
 			<input class="button-submit" type="submit" value="Create">
 		</fieldset>
