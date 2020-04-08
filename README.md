@@ -17,26 +17,28 @@ Fill in any information you want and try it out at [QCard.now.sh](https://qcard.
 
 Essentially a wrapper around the standardised [VCard](https://en.wikipedia.org/wiki/VCard) format, But designed for maximum portability.
 
-Let's break it down in bash:
-```shell
-# An entire QCard
-$ echo https://qcard.now.sh/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ=
 
-# The `v` parameter is Base64 encoded, decode it
-$ echo "QkVHSU46VkNBUkQNCk4..." | base64 --decode
+Let's break it down in `bash`:
+```bash
+# A QCard URL
+$ SAMPLE="https://qcard.now.sh/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ="
 
-BEGIN:VCARD
-N:Github Browser
-TITLE:Interested in QCard
-URL:https://qcard.now.sh
-NOTE:Hey\, that's me!
-END:VCARD
+# Create a helper to parse the QCard Url,
+# This grabs the contents of the `v` parameter and base64 decodes it.
+# ---
+# 1. echo in the QCard Url.
+# 2. grep the `v` parameter and contents.
+# 3. cut the first 3 characters.
+# 4. base64 decode the result.
+$ function qcard() { echo "$@" | grep --only-matching v=.*$ | cut --characters 3- | base64 --decode;}
 
-# You can save this as a `.vcf` file to import somewhere
-# With a bonus bash trick for you to grab the last output.
-$ echo "$(!!)" > contact.vcf
+# Run the helper
+$ qcard $SAMPLE
+
+# You can save the contents to a file to import somewhere
+$ qcard $SAMPLE > contact.vcf
 ```
-[Your QCard](https://qcard.now.sh/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ=)
+[Sample QCard](https://qcard.now.sh/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ=)
 
 ## I want to make QCards programatically
 
