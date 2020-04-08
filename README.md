@@ -6,6 +6,9 @@ QCard is a beautifully simple way to share contact information, here's why you s
 - 📖 Requires no backend, doesn't store data and runs 100% client-side.
 - 💚 Waste free alternative to Business Cards.
 
+---
+You can find the source code on [Github](https://github.com/Azza292/QCard).
+
 ## Try it
 
 Fill in any information you want and try it out at [QCard.now.sh](https://qcard.now.sh)
