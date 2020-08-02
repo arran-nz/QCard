@@ -80,7 +80,7 @@ article {
 		var VCardObj = parseVCardString(decodedVCard);
 		
 		contactDetails = {
-			name: getVCardProperty(VCardObj, "n"),
+			name: getVCardProperty(VCardObj, "fn"),
 			title: getVCardProperty(VCardObj, "title"),
 			email: getVCardProperty(VCardObj, "email"),
 			phone: getVCardProperty(VCardObj, "tel"),

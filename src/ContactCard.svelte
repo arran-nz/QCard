@@ -224,8 +224,8 @@
 
 	// Reactive to any variable changes in this component
 	$: {
-
-		setVCardProperty("n", name);
+		setVCardProperty("version", "3.0");
+		setVCardProperty("fn", name);
 		setVCardProperty("title", title);
 		setVCardProperty("email", email);
 		setVCardProperty("tel", phone);
