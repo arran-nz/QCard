@@ -88,7 +88,7 @@
 		{ id: 'titleField', type:"text", displayName: "Title", value: '', placeholder: "Singer, Poet, Lute Player"},
 		{ id: 'emailField', type:"text", displayName: "Email", value: '', placeholder: "info@balladsfromjaskier.com"},
 		{ id: 'phoneField', type:"tel", displayName: "Phone", value: '', placeholder: "+000 000"},
-		{ id: 'webField', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
+		{ id: 'websiteField', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
 		{ id: 'commentField', type:"textarea", displayName: "Comment", value: '', placeholder: "Yes, yes, yes. You never get involved. Except you actually do, all of the time."},
 		{ id: 'addressField', type:"text", displayName: "Address", value: '', placeholder: "10 Lute Street, 012"},
 	];
