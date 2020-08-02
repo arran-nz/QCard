@@ -81,6 +81,7 @@
 <script>
 	// Import Event Dispatcher
 	import { createEventDispatcher } from 'svelte'
+	import { afterUpdate } from 'svelte';
   	const dispatch = createEventDispatcher()
 
 	let fields = [
@@ -96,6 +97,8 @@
 		{ required: true, id: 'nameField', displayName: "Name", value: '', placeholder: "Jaskier"},
 	];
 
+	let elementIdToFocus;
+
 	// Handle the form submit
 	function handleSubmit(form)
 	{
@@ -104,12 +107,12 @@
 		dispatch("Submitted", 
 		{
 			name: form.target.nameField.value,
-			title: form.target.titleField?.value,
-		  	email: form.target.emailField?.value,
-			phone: form.target.phoneField?.value,
-			website: form.target.webField?.value,
-			comment: form.target.commentField?.value,
-			address: form.target.addressField?.value,
+			title: form.target.titleField ? form.target.titleField.value : "",
+		 	email: form.target.emailField ? form.target.emailField.value : "",
+			phone: form.target.phoneField ? form.target.phoneField.value : "",
+			website: form.target.websiteField ? form.target.websiteField.value : "",
+			comment: form.target.commentField ? form.target.commentField.value : "",
+			address: form.target.addressField ? form.target.addressField.value : "",
 		});
 	}
 
@@ -123,18 +126,16 @@
 		}
 		fields = fields;
 
-		// Sleep for 50ms then focus on the newly active field.
-		sleep(50).then(() => {
-			document.getElementById(field.id).focus();
-		});
+		elementIdToFocus = field.id
 		
 	}
 
-	// sleep time expects milliseconds
-	function sleep (time)
-	{
-		return new Promise((resolve) => setTimeout(resolve, time));
-	}
+	afterUpdate(() => {
+		if (elementIdToFocus != undefined)
+		{
+			document.getElementById(elementIdToFocus).focus();
+		}
+	});
 
 </script>
 
