@@ -224,8 +224,9 @@
 
 	// Reactive to any variable changes in this component
 	$: {
-		setVCardProperty("version", "3.0");
+		var n = ["", name, "", "", ""];
 		setVCardProperty("fn", name);
+		setVCardProperty("n", n);
 		setVCardProperty("title", title);
 		setVCardProperty("email", email);
 		setVCardProperty("tel", phone);
@@ -235,7 +236,7 @@
 
 		vCardString = generateVCardString(
 			vCardObj,
-			false
+			true
 		);
 
 		selfLink = getSelfLink();
