@@ -54,8 +54,8 @@
 		background-color: white;
 
 		border-radius: 5px;
-		margin: 5px;
-		padding: 5px 12px;
+		margin: 4px 2px;
+		padding: 2px 8px;
 		font-size: 0.85rem;
 		display: inline;
 	}
@@ -122,6 +122,18 @@
 			fields.splice(index, 1);
 		}
 		fields = fields;
+
+		// Sleep for 50ms then focus on the newly active field.
+		sleep(50).then(() => {
+			document.getElementById(field.id).focus();
+		});
+		
+	}
+
+	// sleep time expects milliseconds
+	function sleep (time)
+	{
+		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
 </script>
