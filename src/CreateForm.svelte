@@ -10,7 +10,7 @@
 	}
 
 	.button-submit {
-		margin: 0;
+		margin: 15px 0px;
 		font-weight: 800;
 		font-size: 1.5em;
 
@@ -41,12 +41,60 @@
 		padding: 0.2em 0;
 		width: 100%;
 	}
+
+	.field:last-child
+	{
+		margin: 0;
+	}
+
+	.additionalField
+	{
+		cursor: pointer;
+
+		background-color: white;
+
+		border-radius: 5px;
+		margin: 5px;
+		padding: 5px 12px;
+		font-size: 0.85rem;
+		display: inline;
+	}
+
+	.additionalField:hover
+	{
+		border-color: #ff3e00;
+	}
+
+	.additionalField::before
+	{
+		content: "+ ";
+		color: #ff3e00;
+	}
+
+	.additionalField:first-of-type
+	{
+		margin-left: 0;
+	}
+	
 </style>
 
 <script>
 	// Import Event Dispatcher
 	import { createEventDispatcher } from 'svelte'
   	const dispatch = createEventDispatcher()
+
+	let fields = [
+		{ id: 'titleField', type:"text", displayName: "Title", value: '', placeholder: "Singer, Poet, Lute Player"},
+		{ id: 'emailField', type:"text", displayName: "Email", value: '', placeholder: "info@balladsfromjaskier.com"},
+		{ id: 'phoneField', type:"tel", displayName: "Phone", value: '', placeholder: "+000 000"},
+		{ id: 'webField', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
+		{ id: 'commentField', type:"textarea", displayName: "Comment", value: '', placeholder: "Yes, yes, yes. You never get involved. Except you actually do, all of the time."},
+		{ id: 'addressField', type:"text", displayName: "Address", value: '', placeholder: "10 Lute Street, 012"},
+	];
+
+	let activeFields = [
+		{ required: true, id: 'nameField', displayName: "Name", value: '', placeholder: "Jaskier"},
+	];
 
 	// Handle the form submit
 	function handleSubmit(form)
@@ -56,35 +104,48 @@
 		dispatch("Submitted", 
 		{
 			name: form.target.nameField.value,
-			title: form.target.titleField.value,
-		  email: form.target.emailField.value,
-			phone: form.target.phoneField.value,
-			website: form.target.webField.value,
-			comment: form.target.commentField.value
+			title: form.target.titleField?.value,
+		  	email: form.target.emailField?.value,
+			phone: form.target.phoneField?.value,
+			website: form.target.webField?.value,
+			comment: form.target.commentField?.value,
+			address: form.target.addressField?.value,
 		});
 	}
+
+	/// Move a field from `fields` to `activeFields`
+	function makeFieldActive(field)
+	{
+		activeFields = [...activeFields, field];
+		const index = fields.indexOf(field);
+		if (index > -1) {
+			fields.splice(index, 1);
+		}
+		fields = fields;
+	}
+
 </script>
 
 <article>
 	<form on:submit|preventDefault="{handleSubmit}">
 		<fieldset>
-			<label class="required" for="nameField">Name</label>
-			<input type="text" placeholder="Jaskier" id="nameField" required>
+			<div id="fields">
+			{#each activeFields as field (field.id)}
+				
+				<label class:required={field.required} for={field.id}>{field.displayName}</label>
 
-			<label for="titleField">Title</label>
-			<input type="text" placeholder="Singer, Poet, Lute Player" id="titleField">
+				{#if field.type == "textarea"}
+					<textarea class="field" placeholder={field.placeholder} id={field.id} required={field.required}></textarea>
+				{:else}
+				<input class="field" type={field.type} placeholder={field.placeholder} id={field.id} required={field.required}>
+				{/if}
+				
+			{/each}
+			</div>
 
-			<label for="emailField">Email</label>
-			<input type="text" placeholder="info@balladsfromjaskier.com" id="emailField">
-
-			<label for="phoneField">Phone</label>
-			<input type="tel" placeholder="+0 000 000 000" id="phoneField">
-
-			<label for="webField">Website</label>
-			<input type="url" placeholder="https://thelute.com" id="webField">
-			
-			<label for="commentField">Comment</label>
-			<textarea placeholder="Yes, yes, yes. You never get involved. Except you actually do, all of the time." id="commentField"></textarea>
+			{#each fields as field (field.id)}
+				<button class="additionalField" on:click|once="{() => makeFieldActive(field)}">{field.displayName}</button>
+			{/each}
 
 			<input class="button-submit" type="submit" value="Create">
 		</fieldset>
