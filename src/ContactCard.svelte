@@ -210,6 +210,7 @@
 	export let phone;
 	export let website;
 	export let comment;
+	export let address;
 
 	export let loadedExternalVCard;
 
@@ -230,6 +231,7 @@
 		setVCardProperty("tel", phone);
 		setVCardProperty("url", website);
 		setVCardProperty("note", comment);
+		setVCardProperty("adr", address);
 
 		vCardString = generateVCardString(
 			vCardObj,
@@ -365,7 +367,12 @@
 				<h2>{title}</h2>
 				{/if}
 			</header>
-
+			
+			{#if address}
+			<div id="address">
+				<p>{address}</p>
+			</div>
+			{/if}
 
 			{#if comment}
 			<div id="comment">

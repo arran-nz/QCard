@@ -47,6 +47,7 @@ article {
 		phone: "",
     	website: "",
 		comment: "",
+		address: "",
 	};
 
 	let loadedExternalVCard = false;
@@ -85,6 +86,7 @@ article {
 			phone: getVCardProperty(VCardObj, "tel"),
 			website: getVCardProperty(VCardObj, "url"),
 			comment: getVCardProperty(VCardObj, "note"),
+			address: getVCardProperty(VCardObj, "adr")
 		}
 
 		loadedExternalVCard = true;
@@ -152,6 +154,7 @@ article {
 		phone = {contactDetails.phone}
 		website = {contactDetails.website}
 		comment = {contactDetails.comment}
+		address = {contactDetails.address}
 
 		loadedExternalVCard = {loadedExternalVCard}
 	/>
