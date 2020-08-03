@@ -49,6 +49,7 @@
 
 	.additionalField
 	{
+		transition: all 100ms;
 		cursor: pointer;
 
 		background-color: white;
@@ -58,9 +59,8 @@
 		padding: 2px 8px;
 		font-size: 0.85rem;
 		display: inline;
-	}
-
-	.additionalField:hover
+	}	
+	.additionalField:hover, .additionalField:focus
 	{
 		border-color: #ff3e00;
 	}
