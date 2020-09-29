@@ -54,7 +54,7 @@
 <article>
   
   <div class="reload" on:click={handleReloadRequest} alt="Reload the application">
-    <h1><strong>QCard</strong>.now.sh</h1>
+    <h1><strong>QCard</strong>.link</h1>
   </div>
 
   <p>

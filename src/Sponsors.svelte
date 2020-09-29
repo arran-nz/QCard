@@ -52,7 +52,7 @@
 		</label>
 
         <label>
-            <a href="https://simpleanalytics.com?ref=qcard.now.sh" alt="Simple Anayltics Main Page" target="_blank">
+            <a href="https://simpleanalytics.com?ref=qcard.link" alt="Simple Anayltics Main Page" target="_blank">
                 <svg class="simple" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
                     <rect x="20" y="53" width="10" height="30"></rect>
                     <rect x="44" y="35" width="10" height="48"></rect>

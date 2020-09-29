@@ -37,5 +37,5 @@ card.note.value = 'Here I go, making cards in Python again'
 serializedCard = card.serialize()
 encodedCard = base64.b64encode(serializedCard.encode())
 
-print("https://qcard.now.sh/?v={}".format(encodedCard.decode()))
+print("https://qcard.link/?v={}".format(encodedCard.decode()))
 ```

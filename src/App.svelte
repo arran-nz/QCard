@@ -103,7 +103,7 @@ article {
 	{#if loadedExternalVCard}
   		<title>{contactDetails.name}'s QCard</title>
   	{:else}
-  		<title>QCard.now.sh - Contact Sharing</title>
+  		<title>QCard.link - Contact Sharing</title>
   	{/if}
 	  
 	<!-- Set Android Browser Tab Colour -->
