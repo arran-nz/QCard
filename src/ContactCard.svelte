@@ -178,7 +178,7 @@
 	let vCardObj = {};
 	let vCardString;
 
-	let baseUrl = window.location.href.split('?')[0];
+	let baseUrl = "https://qcard.link/";
 	let selfLink;
 
 	// Reactive to any variable changes in this component
