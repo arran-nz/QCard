@@ -9,6 +9,10 @@ article {
 	flex-direction: row;
 }
 
+article div {
+	min-width: 300px;
+}
+
 #app-header {
 	width: 100%;
 }
@@ -16,14 +20,12 @@ article {
 #create-form {
 	margin: 1em auto;
 	width: 100%;	
-	max-width: 1000px;
-	min-width: 250px;	
+	max-width: 1000px;	
 }
 
 #contact-card {
 	margin: 40px auto;
 	max-width: 420px;
-	min-width: 350px;
 }
 
 @media all and (max-width: 600px) {
