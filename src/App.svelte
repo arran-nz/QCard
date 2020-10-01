@@ -21,9 +21,18 @@ article {
 }
 
 #contact-card {
-	margin: 1em auto;
+	margin: 40px auto;
 	max-width: 420px;
-	min-width: 250px;
+	min-width: 350px;
+}
+
+@media all and (max-width: 600px) {
+	#contact-card {
+		max-width: none;
+		min-width: none;
+		width: 100%;
+		margin: 0px auto;
+	}
 }
 
 

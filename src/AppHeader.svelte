@@ -11,7 +11,7 @@
     }
 
     strong {
-        color: #ff3e00;
+        color: #D64550;
         font-weight: 600;
     }
 
