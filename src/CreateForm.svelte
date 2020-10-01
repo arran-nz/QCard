@@ -1,7 +1,7 @@
 <style>
 
 	label.required:after{
-		color: #ff3e00;
+		color: #D64550;
 		content: " *";
 	}
 
@@ -14,7 +14,7 @@
 		font-weight: 800;
 		font-size: 1.5em;
 
-		background-color: #ff3e00;
+		background-color: #D64550;
 		color: white;
 
 		display: block;
@@ -62,13 +62,14 @@
 	}	
 	.additionalField:hover, .additionalField:focus
 	{
-		border-color: #ff3e00;
+		border-color: #D64550;
 	}
 
 	.additionalField::before
 	{
 		content: "+ ";
-		color: #ff3e00;
+		color: #D64550;
+		font-weight: 600;
 	}
 
 	.additionalField:first-of-type

@@ -779,9 +779,9 @@ var QRCode = {
 		context = canvas.getContext('2d');
 		if (!context) throw 'canvas support is needed for PNG output';
 
-		context.fillStyle = '#fff';
+		context.fillStyle = 'transparent';
 		context.fillRect(0, 0, size, size);
-		context.fillStyle = '#000';
+		context.fillStyle = options.fill || '#000';
 		for (var i = 0; i < n; ++i) {
 			for (var j = 0; j < n; ++j) {
 				if (matrix[i][j]) {

@@ -13,7 +13,8 @@ let src;
 export let dataToEncode;
 export let qrOptions = {
             margin: 0,
-            modulesize: 10
+            modulesize: 10,
+            fill: "#2f363d"
         }
 
 // Reactive to any variable changes in this component
