@@ -263,7 +263,7 @@
 
 		// Display Toast Notification to User.
 		var toast = new Toast();
-		toast.success('QCard URL Copied');
+		toast.success(name + '\'s ' + 'QCard Copied');
 
 	}
 
