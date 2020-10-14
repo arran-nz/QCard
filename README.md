@@ -21,7 +21,7 @@ Essentially a wrapper around the standardised [VCard](https://en.wikipedia.org/w
 Let's break it down in `bash`:
 ```bash
 # A QCard URL
-$ SAMPLE="https://qcard.link/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ="
+$ SAMPLE="https://qcard.link/?v=QkVHSU46VkNBUkQNCkZOOkludGVyZXN0ZWQgRGV2ZWxvcGVyDQpOOjtJbnRlcmVzdGVkIERldmVsb3Blcjs7Ow0KVElUTEU6R2l0IHNub29wDQpVUkw6aHR0cHM6Ly9xY2FyZC5saW5rDQpOT1RFOllvdSB0cmllZCB0aGUgc2FtcGxlIQ0KVkVSU0lPTjozLjANClVJRDphNDY2YTI0MS1hYzJmLTljZWQtOTdkNy02YTQ4YzQwZGRlMjkNCkVORDpWQ0FSRA=="
 
 # Create a helper to parse the QCard Url,
 # This grabs the contents of the `v` parameter and base64 decodes it.
@@ -38,7 +38,7 @@ $ qcard $SAMPLE
 # You can save the contents to a file to import somewhere
 $ qcard $SAMPLE > contact.vcf
 ```
-[Sample QCard](https://qcard.link/?v=QkVHSU46VkNBUkQNCk46R2l0aHViIEJyb3dzZXINClRJVExFOkludGVyZXN0ZWQgaW4gUUNhcmQNClVSTDpodHRwczovL3FjYXJkLm5vdy5zaA0KTk9URTpIZXlcLCB0aGF0J3MgbWUhDQpFTkQ6VkNBUkQ=)
+[Sample QCard](https://qcard.link/?v=QkVHSU46VkNBUkQNCkZOOkludGVyZXN0ZWQgRGV2ZWxvcGVyDQpOOjtJbnRlcmVzdGVkIERldmVsb3Blcjs7Ow0KVElUTEU6R2l0IHNub29wDQpVUkw6aHR0cHM6Ly9xY2FyZC5saW5rDQpOT1RFOllvdSB0cmllZCB0aGUgc2FtcGxlIQ0KVkVSU0lPTjozLjANClVJRDphNDY2YTI0MS1hYzJmLTljZWQtOTdkNy02YTQ4YzQwZGRlMjkNCkVORDpWQ0FSRA==)
 
 ## I want to make QCards programatically
 
