@@ -120,7 +120,8 @@ article div {
 	<!-- Set Android Browser Tab Colour -->
 	<meta name="theme-color" content="#ff3e00">
 
-  	<script async defer src="https://cdn.simpleanalytics.io/hello.js"></script>
+  <!-- Analytics -->
+  <script async defer src="https://sa.qcard.link/latest.js"></script>
 </svelte:head>
 
 
@@ -179,6 +180,4 @@ article div {
 {/if}
 
 <!-- Simple Analytics-->
-<img src="https://api.simpleanalytics.io/hello.gif" alt="">
-
-
+<noscript><img src="https://sa.qcard.link/noscript.gif" alt=""/></noscript> 
