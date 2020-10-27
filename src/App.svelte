@@ -129,15 +129,7 @@ article div {
 
 {#if !loadedExternalVCard}
 <div id="app-header">
-	<AppHeader
-		on:ReloadRequested = {
-			event =>
-			{
-				console.log("Reload Requested");
-			}
-		}
-	
-	/>
+	<AppHeader/>
 </div>
 <div id="create-form">
 	<CreateForm 
