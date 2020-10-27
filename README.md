@@ -52,5 +52,5 @@ Welcome!
 
 ## Issues
 
-If your device gets hit by a stray cosmic ray and the application breaks.. please create an Issue here on Github.
+If your device gets hit by a stray cosmic ray and the application breaks.. please create an [Issue](https://codeberg.org/arran/qcard/issues).
 
