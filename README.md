@@ -7,7 +7,7 @@ QCard is a beautifully simple way to share contact information, here's why you s
 - 💚 Waste free alternative to Business Cards.
 
 ---
-You can find the source code on [Github](https://github.com/Azza292/QCard).
+You can find the source code on [Codeberg](https://codeberg.org/arran/qcard).
 
 ## Try it
 
