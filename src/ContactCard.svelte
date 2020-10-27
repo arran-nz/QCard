@@ -2,13 +2,17 @@
 	#card {
 		display: flex;
 		flex-direction: column;
+		padding: 1em;
 
-		padding: 20px;
 		border-radius: 5px;
 
-		-webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-		-moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
-		box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.25);
+		border-bottom: 4px solid #A9A9A9;
+		border-top: 1px solid whitesmoke;
+
+		border-left: 1px solid #D3D3D3;
+		border-right: 1px solid #D3D3D3;
+
+
 		color: #2f363d;
 	}
 	h1, h2 {
