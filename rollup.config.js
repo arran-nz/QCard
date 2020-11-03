@@ -18,6 +18,10 @@ export default {
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
+
+			// Sever as a static site.
+			hydratable: true,
+			
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {

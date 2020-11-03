@@ -5,6 +5,7 @@ var app = new App({
 	
 	// This flag will cause animations to run at page load
 	intro: true,
+	hydrate: true,
 });
 
 export default app;
