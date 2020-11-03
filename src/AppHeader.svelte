@@ -1,18 +1,11 @@
 <style>
 
-    h1, p {
-		color: #606c76;
-		text-align:center;
+    a {
+        color:inherit;
     }
-
 
     article {
-        margin: 1em;
-    }
-
-    strong {
-        color: #D64550;
-        font-weight: 600;
+        margin: 1em 2em;
     }
 
     h1 strong {
@@ -20,20 +13,11 @@
     }
 
     h1 {
-        margin: 0;
-        font-size: 2em;
-        font-weight: 500;
-        line-height: 0.8em;
-        
+        text-align: center;
     }
 
     p {
-        margin: 10;
-        font-size: 1.2em;
-    }
-
-    a {
-        text-decoration: none;
+        text-align: center;
     }
     
 </style>

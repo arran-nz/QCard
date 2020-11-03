@@ -1,49 +1,27 @@
 <style>
-	#card {
+	article {
 		display: flex;
 		flex-direction: column;
 		padding: 1em;
 
 		border-radius: 5px;
-
-		border-bottom: 4px solid #A9A9A9;
-		border-top: 1px solid whitesmoke;
-
-		border-left: 1px solid #D3D3D3;
-		border-right: 1px solid #D3D3D3;
-
-
-		color: #2f363d;
-	}
-	h1, h2 {
-		text-align: left;
 	}
 
 	h1 {
+		color: #2f363d;
 		margin: 0;
-		font-size: 2.5em;
 		line-height: 0.9em;
 	}
 
 	h2 {
 		font-size: 1.2em;
 		margin: 0;
-		color: #606c76;
-	}
-
-	hr {
-		border: 1px solid whitesmoke;
-		margin: 10px 0;
 	}
 
 	header {
 		margin-bottom: 10px;
 	}
-
-	p {
-		font-size:1em;
-	}
-
+	
 	#comment {
 		padding: 5px 0px;
 		border-left: 7px solid whitesmoke;
@@ -51,37 +29,9 @@
 
 	#comment p {
 		margin: 5px 10px;
+		font-size: 1em;
+		word-break: keep-all;
 	}
-
-	/* Contact Copying */
-	ul.contact-copy {
-		list-style-type: none;
-		padding: 0;
-	}
-
-	ul.contact-copy li {
-		font-weight: 400;
-		letter-spacing: 2px;
-
-		margin: 5px 0;
-		padding: 10px;
-
-		background-color: whitesmoke;
-		border-radius: 5px;
-		border: 1px solid #ccc;
-
-		font-size: 0.8em;
-	}
-
-	ul.contact-copy li img{
-		float: right;
-		height: 20px;
-	}
-
-	a {
-		font-size: 1.2em;
-		color:inherit;
-  	}
 
 	a img {
 		transition: all 0.1s ease-in-out;
@@ -97,32 +47,22 @@
 
 	button {
 		margin: 0 5px;
-		padding: 5px 30px;
+		padding: 0.2em 1.5em;
 		font-weight: 600;
 
 		border: 0;
 		border-radius: 5px;
 
 		cursor: pointer;
+
+		transition: all 0.1s ease-in;
+		background-color: whitesmoke;
 	}
 
 	button.download {
 		background-color: #D64550;
 	}
 
-
-	.create-footer-link {
-		margin: 1em;
-		display:block;
-		font-size: 0.8em;
-		font-weight: 300;
-		text-align: right;
-	}
-
-	.create-footer-link strong {
-		color: #D64550;
-		font-weight: 600;
-	}
 	
 	/*Contact Info*/
 
@@ -159,31 +99,26 @@
 </style>
 
 <script>
-	import { fly } from 'svelte/transition';
-	import { backOut } from 'svelte/easing';
-
 	import Toast from 'svelte-toast'
 
 	import QRCode from './QRCode.svelte';
 	import { generateVCardString } from './plugins/vcard.js';
 
 	export let name;
-	export let title;
-	export let email
-	export let phone;
-	export let website;
-	export let comment;
-	export let address;
+	export let title = "";
+	export let email = "";
+	export let phone = "";
+	export let website = "";
+	export let comment = "";
+	export let address = "";
 
-	export let loadedExternalVCard;
-
-	let showRawData = false;
-
+	export let vCardString;
+	export let selfLink;
+	
+	//let baseUrl = "https://qcard.link/";
+	let baseUrl = "http://localhost:5000/";
+	
 	let vCardObj = {};
-	let vCardString;
-
-	let baseUrl = "https://qcard.link/";
-	let selfLink;
 
 	// Reactive to any variable changes in this component
 	$: {
@@ -239,7 +174,7 @@
 		if (navigator.share) {
 			navigator.share({
 				title: name + "'s QCard'",
-				text: "Here's " + {name} + "'s contact information",
+				text: "Here's " + name + "'s contact information",
 				url: selfLink,
 			})
 				.then(() => console.log('Successful share'))
@@ -273,51 +208,12 @@
 
 </script>
 
-<article in:fly="{{ x: -100, duration: 600, easing: backOut }}">
-<div id="card">
-  	{#if selfLink && !showRawData}
-
-	<div class="qrcode-container">
-		<a href={selfLink} alt="QCard URL">
-			<QRCode dataToEncode = {selfLink}/>
-		</a>
-	</div>
-	{:else}
-		<ul class="contact-copy">
-
-			{#if email}
-			<li>
-				{email}
-				<img src="/icons/copy.svg" alt="Copy Icon"/>
-			</li>
-			{/if}
-
-			{#if phone}
-			<li>
-				{phone}
-				<img src="/icons/copy.svg" alt="Copy Icon"/>
-			</li>
-			{/if}
-
-			{#if website}
-			<li>
-				{website}
-				<img src="/icons/copy.svg" alt="Copy Icon"/>
-			</li>
-			{/if}
-
-			{#if address}
-			<li>
-				{address}
-				<img src="/icons/copy.svg" alt="Copy Icon"/>
-			</li>
-			{/if}
-		</ul>
-	{/if}
+<article class="shadow">
+	<a href={selfLink} alt="QCard URL">
+		<QRCode dataToEncode = {selfLink}/>
+	</a>
 
 	<hr>
-
-	<!-- BEGIN-->
 
 	<div class="contact-info-container">
 
@@ -340,7 +236,7 @@
 		</div>
 
 
-		{#if email || phone || website}
+		{#if email || phone || website || address}
 		<div class="contact-methods">
 			{#if email}
 			<div class="contact-method-item">
@@ -378,9 +274,6 @@
 
 	</div>
 
-
-	<!-- STOP-->
-
 	<hr>
 
 	<div class="button-container">
@@ -395,20 +288,11 @@
 		</button>
 		{/if}
 
-		<button on:click={DownloadVCard} class="download" alt="Download the VCard">
+		<button on:click={DownloadVCard} alt="Download the VCard" class="download">
 			<img src="/icons/download.svg" alt="Download Icon"/>
 		</button>
 
 	</div>
-
-</div>
-
-	{#if loadedExternalVCard}
-		<div class="create-footer-link" in:fly="{{ y: -20, duration: 600, delay:800, easing: backOut}}">
-			<a href={baseUrl}>Create your own <strong>QCard</strong></a>
-		</div>
-	{/if}
-
 </article>
 
 

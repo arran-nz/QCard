@@ -1,20 +1,12 @@
 <style>
 
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin: 0 auto;
-    }
-
-    .container div {
+    .flex-container div {
         margin: 1em 2em;
         align-self: center;
     }
 
     label {
         margin: 0;
-        color: #606c76;
         font-size: 1em;
         font-weight: 500;
     }
@@ -25,26 +17,9 @@
         text-align: center;
     }
 
-
     a {
         justify-content: center;
-        display: flex;
-        color: inherit;
-        cursor: pointer;    
-    }
-
-    svg {
-        box-sizing: border-box;
-        width: 24px;
-        height: 24px;
-        fill: #ff4f64;        
-        margin: 0px 2px;
-    }
-
-
-    hr {
-        border: 1px solid whitesmoke;
-        margin:  1em auto;
+        display: flex; 
     }
 
     .icon {
@@ -53,17 +28,10 @@
         align-self: center;
     }
 
-    @media all and (max-width: 600px) {
-        .container {
-            flex-direction: column;
-        }
-    }
-
 </style>
 
 <article>    
-    <hr>
-    <div class="container">
+    <div class="flex-container">
     
         <div id="sa">
             <a href="https://simpleanalytics.com/qcard.link?utm_source=qcard.link&utm_content=badge" referrerpolicy="origin" target="_blank"><img class="simpleanalytics" src="https://simpleanalyticsbadge.com/qcard.link?background=transparent&text=606c76" loading="lazy" referrerpolicy="no-referrer" crossorigin="anonymous" /></a>
@@ -81,7 +49,4 @@
         </div>
 
     </div>
-
-
-
 </article>

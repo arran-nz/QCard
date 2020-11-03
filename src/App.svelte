@@ -1,175 +1,58 @@
-<style>
-
-article {
-	margin: 0 auto;
-	max-width: 1600px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	flex-direction: row;
-}
-
-article div {
-	min-width: 300px;
-}
-
-#app-header {
-	width: 100%;
-}
-
-#create-form {
-	margin: 1em auto;
-	width: 100%;	
-	max-width: 1000px;	
-}
-
-#contact-card {
-	margin: 40px auto;
-	max-width: 420px;
-}
-
-@media all and (max-width: 600px) {
-	#contact-card {
-		max-width: none;
-		min-width: none;
-		width: 100%;
-		margin: 0px auto;
-	}
-}
-
-
-
-</style>
-
-
 <script>
-	import { fade } from 'svelte/transition';
-	
-	import ContactCard from './ContactCard.svelte';
-	import CreateForm from './CreateForm.svelte';
-	import AppHeader from './AppHeader.svelte';
-	import Sponsors from './Sponsors.svelte';
-	import { parseVCardString } from './plugins/vcard.js';
+    import { Router, Route, Link } from "svelte-routing";
+    import { navigate } from "svelte-routing";
 
-	let contactDetails = {
-		name: "",
-		title: "",
-		email: "",
-		phone: "",
-    	website: "",
-		comment: "",
-		address: "",
-	};
+    import { fade } from 'svelte/transition';
+    
+    import Home from "./pages/Home.svelte";
+    import Create from "./pages/CreateCard.svelte";
+    import View from "./pages/ViewCard.svelte";
+    
+    
+    export let url = "";
 
-	let loadedExternalVCard = false;
-
-
-	function getUrlVars() {
-		var vars = {};
-		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-			vars[key] = value;
-		});
-		return vars;
-	}
-
-	function decodeData(str) {
-		return decodeURIComponent(escape(window.atob(str)));
-	}
-
-	function getVCardProperty(VCardObj, key){
-
-            if ( (VCardObj.hasOwnProperty(key)) && (Array.isArray(VCardObj[key])) ){
-				return VCardObj[key][0].value; 
-			}
-            return "";
-	}
-
-	// Get Card Data (If present)
-	var encodedVCard = getUrlVars()["v"]
-	if (encodedVCard != null || encodedVCard != undefined){    
-		var decodedVCard = decodeData(encodedVCard);
-		var VCardObj = parseVCardString(decodedVCard);
-		
-		contactDetails = {
-			name: getVCardProperty(VCardObj, "fn"),
-			title: getVCardProperty(VCardObj, "title"),
-			email: getVCardProperty(VCardObj, "email"),
-			phone: getVCardProperty(VCardObj, "tel"),
-			website: getVCardProperty(VCardObj, "url"),
-			comment: getVCardProperty(VCardObj, "note"),
-			address: getVCardProperty(VCardObj, "adr")
-		}
-
-		loadedExternalVCard = true;
-	}
-
-	// sleep time expects milliseconds
-	function sleep (time) {
-		return new Promise((resolve) => setTimeout(resolve, time));
-	}
+    const urlParams = new URLSearchParams(location.search);
+    if (urlParams.has('v'))
+    {
+      navigate("/card/?v=" + urlParams.get('v'), { replace: true });
+    }
 
 </script>
 
 <svelte:head>
-	{#if loadedExternalVCard}
-  		<title>{contactDetails.name}'s QCard</title>
-  	{:else}
-  		<title>QCard.link - Contact Sharing</title>
-  	{/if}
-	  
+	<title>QCard.link - Contact Sharing</title>
 	<!-- Set Android Browser Tab Colour -->
-	<meta name="theme-color" content="#ff3e00">
+	<meta name="theme-color" content="#D64550">
 
   <!-- Analytics -->
   <script async defer src="https://sa.qcard.link/latest.js"></script>
 </svelte:head>
 
+<main transition:fade class="mx-auto">
+  <Router url="{url}">  
+      <div>
+        <Route path="/"  component="{Home}" />
+        <Route path="create" component="{Create}" /> 
+        <Route path="card" component="{View}" /> 
+      </div>
 
-<article transition:fade>
-
-{#if !loadedExternalVCard}
-<div id="app-header">
-	<AppHeader/>
-</div>
-<div id="create-form">
-	<CreateForm 
-		on:Submitted = { 
-			event =>
-			{
-				contactDetails = event.detail;
-				
-				// Must wait until the DOM object is rendered before scrolling.
-				sleep(50).then(() => {
-					document.getElementById("contact-card").scrollIntoView({ behavior: "smooth", block: "center" }); 
-				});
-
-			}
-		}
-	/>
-</div>
-{/if}
-
-{#if contactDetails.name != ""}
-<div id="contact-card">
-	<ContactCard 
-		name = {contactDetails.name}
-		title = {contactDetails.title}
-		email = {contactDetails.email}
-		phone = {contactDetails.phone}
-		website = {contactDetails.website}
-		comment = {contactDetails.comment}
-		address = {contactDetails.address}
-
-		loadedExternalVCard = {loadedExternalVCard}
-	/>
-</div>
-{/if}
-
-</article>
-
-{#if !loadedExternalVCard}
-<Sponsors />
-{/if}
+      <nav class="limit-width">
+        <Link to="/">Home</Link>
+        <Link to="create">Create</Link>
+      </nav>
+  </Router>   
+</main> 
 
 <!-- Simple Analytics-->
-<noscript><img src="https://sa.qcard.link/noscript.gif" alt=""/></noscript> 
+<noscript><img src="https://sa.qcard.link/noscript.gif" alt="Simple Analytics for NoScript"/></noscript> 
+
+
+<style>
+  nav {
+    background-color: whitesmoke;
+    margin:10em auto;
+    padding: 1em;
+    border-top:6px solid lightskyblue;
+  }
+</style>
+

@@ -1,5 +1,4 @@
 <style>
-
 	label.required:after{
 		color: #D64550;
 		content: " *";
@@ -7,27 +6,12 @@
 
 	fieldset {
 		border: 0;
+		padding:0;
+		margin:0;
 	}
-
-	.button-submit {
-		margin: 15px 0px;
-		font-weight: 800;
-		font-size: 1.5em;
-
-		background-color: #D64550;
-		color: white;
-
-		display: block;
-	}
-
-	.button-submit:hover{
-		cursor: pointer;
-	}
-
 	input, textarea {
 		width: 100%;
 		padding: 0.5em;
-		border-radius: 5px;
 	}
 
 	textarea {
@@ -161,7 +145,7 @@
 				<button class="additionalField" on:click|once="{() => makeFieldActive(field)}">{field.displayName}</button>
 			{/each}
 
-			<input class="button-submit" type="submit" value="Create">
+			<input class="button bold" type="submit" value="Create">
 		</fieldset>
 	</form>
 </article>

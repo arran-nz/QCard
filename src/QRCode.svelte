@@ -19,7 +19,6 @@ export let qrOptions = {
 
 // Reactive to any variable changes in this component
 $: {
-    console.log("Rendered QRCode");
     src = QRCode.generatePNG(
         dataToEncode,
         qrOptions
