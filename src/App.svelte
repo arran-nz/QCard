@@ -31,7 +31,7 @@
 <main transition:fade class="mx-auto">
   <Router url="{url}">  
       <div>
-        <Route path="/"  component="{Home}" />
+        <Route path="/" component="{Home}" />
         <Route path="create" component="{Create}" /> 
         <Route path="card" component="{View}" /> 
       </div>

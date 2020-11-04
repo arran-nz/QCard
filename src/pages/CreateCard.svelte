@@ -41,7 +41,7 @@
 						
 						// Must wait until the DOM object is rendered before scrolling.
 						sleep(50).then(() => {
-							document.getElementById("contact-card").scrollIntoView({ behavior: "smooth", block: "center" }); 
+							document.getElementById("created-card").scrollIntoView({ behavior: "smooth", block: "center" });
 						});
 
 					}
@@ -51,7 +51,7 @@
 
 		{#if contactDetails.name != ""}
 		<div class="spacer" />
-		<div id="create-card" class="mx-auto">
+		<div id="created-card" class="mx-auto">
 			<ContactCard 
 				name = {contactDetails.name}
 				title = {contactDetails.title}
@@ -81,7 +81,7 @@
 		padding: 0.5em;
 	}
 
-	#create-card{
+	#created-card{
 		flex:0.5;
 		align-self: center;
 

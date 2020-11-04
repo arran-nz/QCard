@@ -116,7 +116,7 @@
 	export let selfLink;
 	
 	let viewCardPrefixUrl = "https://qcard.link/card/#";
-	
+
 	let vCardObj = {};
 
 	// Reactive to any variable changes in this component
