@@ -25,12 +25,13 @@
 	#comment {
 		padding: 5px 0px;
 		border-left: 7px solid whitesmoke;
+		overflow: hidden;
 	}
 
 	#comment p {
 		margin: 5px 10px;
 		font-size: 1em;
-		word-break: keep-all;
+		word-break: break-all;
 	}
 
 	a img {
