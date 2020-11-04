@@ -54,7 +54,7 @@
             </p>
 
             <h3>
-                Save or print a <strong>screenshot</strong> of the QR code on your phone for quick access
+                Save or print a <strong>screenshot</strong> of the QR code for quick access!
             </h3>
         </div>
         <div class="media">
