@@ -35,24 +35,9 @@
         <Route path="create" component="{Create}" /> 
         <Route path="card" component="{View}" /> 
       </div>
-
-      <nav class="limit-width">
-        <Link to="/">Home</Link>
-        <Link to="create">Create</Link>
-      </nav>
   </Router>   
 </main> 
 
 <!-- Simple Analytics-->
 <noscript><img src="https://sa.qcard.link/noscript.gif" alt="Simple Analytics for NoScript"/></noscript> 
-
-
-<style>
-  nav {
-    background-color: whitesmoke;
-    margin:10em auto;
-    padding: 1em;
-    border-top:6px solid lightskyblue;
-  }
-</style>
 
