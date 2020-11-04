@@ -115,8 +115,7 @@
 	export let vCardString;
 	export let selfLink;
 	
-	//let baseUrl = "https://qcard.link/";
-	let baseUrl = "http://localhost:5000/";
+	let baseUrl = "https://qcard.link/";
 	
 	let vCardObj = {};
 
