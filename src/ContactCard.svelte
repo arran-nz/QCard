@@ -115,7 +115,7 @@
 	export let vCardString;
 	export let selfLink;
 	
-	let baseUrl = "https://qcard.link/";
+	let viewCardPrefixUrl = "https://qcard.link/card/#";
 	
 	let vCardObj = {};
 
@@ -149,7 +149,7 @@
 
 	function getSelfLink(){
 		var encodedVCard = encodeData(vCardString);
-		var selfLink = baseUrl + "?v=" + encodedVCard;
+		var selfLink = viewCardPrefixUrl + encodedVCard;
 		return selfLink;
 	}
 

@@ -8,13 +8,13 @@
     import Create from "./pages/CreateCard.svelte";
     import View from "./pages/ViewCard.svelte";
     
-    
     export let url = "";
 
+    // Legacy redirect for QCards where query parameter is used.
     const urlParams = new URLSearchParams(location.search);
     if (urlParams.has('v'))
     {
-      navigate("/card/?v=" + urlParams.get('v'), { replace: true });
+      navigate("/card/#" + urlParams.get('v'), { replace: true });
     }
 
 </script>

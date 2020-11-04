@@ -14,7 +14,12 @@
 				return VCardObj[key][0].value; 
 			}
             return "";
-	}
+    }
+
+    function encodedDataFromFragmentIdentifier(url){
+        let parts = url.split("#");
+        return parts[1];
+    }
 
     let contactDetails = {
 		name: "",
@@ -26,13 +31,17 @@
 		address: "",
     };
 
-    const urlParams = new URLSearchParams(location.search);
     let loading = true;
-
-    if (urlParams.has("v")){
-        var encodedVCard = urlParams.get("v");
-        var decodedVCard = decodeData(encodedVCard);
-        var VCardObj = parseVCardString(decodedVCard);
+    let encodedVCard = encodedDataFromFragmentIdentifier(window.location.href.toString());
+    if (encodedVCard != undefined)
+    {
+        try{
+            var decodedVCard = decodeData(encodedVCard);
+            var VCardObj = parseVCardString(decodedVCard);
+        }
+        catch (error){
+            console.error(error);
+        }
         
         contactDetails = {
             name: getVCardProperty(VCardObj, "fn"),
