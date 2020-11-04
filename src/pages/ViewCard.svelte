@@ -5,7 +5,11 @@
     import { parseVCardString } from '../plugins/vcard.js';
 
 	function decodeData(str) {
-		return decodeURIComponent(escape(window.atob(str)));
+        // https://attacomsian.com/blog/javascript-base64-encode-decode
+        // Going backwards: from bytestream, to percent-encoding, to original string.
+        return decodeURIComponent(atob(str).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
 	}
 
 	function getVCardProperty(VCardObj, key){
