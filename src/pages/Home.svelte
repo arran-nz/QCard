@@ -7,7 +7,7 @@
 
     let name = "Kim"
     let title = "DevOps Engineer"
-    let comment = "We meet at the 2021 FOSS Conference that is yet to happen! 🍺🍺"
+    let comment = "We meet at the 2021 FOSS Conference that is yet to happen!"
     let phone = "+555"
     let email = "null@example.com"
     let sampleVCard = "";
