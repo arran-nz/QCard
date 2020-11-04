@@ -6,7 +6,7 @@
 	import ContactCard from '../ContactCard.svelte';
 	import CreateForm from '../CreateForm.svelte';
 	import AppHeader from '../AppHeader.svelte';
-	import Sponsors from '../Sponsors.svelte';
+	import Footer from '../Footer.svelte';
 
 	let contactDetails = {
 		name: "",
@@ -69,7 +69,7 @@
 
 <hr>
 
-<Sponsors />
+<Footer />
 
 <style>
 

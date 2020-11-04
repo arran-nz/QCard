@@ -2,7 +2,7 @@
     import { Link } from "svelte-routing";
     import ContactCard from '../ContactCard.svelte'; 
     import AppHeader from '../AppHeader.svelte'; 
-    import Sponsors from '../Sponsors.svelte';
+    import Footer from '../Footer.svelte';
     import QRCode from '../QRCode.svelte';
 
     let name = "Kim"
@@ -112,7 +112,7 @@
 
     <hr>
 
-    <Sponsors/>
+    <Footer showSponsors=true/>
 
 </article>
 <style>
