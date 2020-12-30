@@ -76,6 +76,7 @@
 		{ id: 'websiteField', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
 		{ id: 'commentField', type:"textarea", displayName: "Comment", value: '', placeholder: "Yes, yes, yes. You never get involved. Except you actually do, all of the time."},
 		{ id: 'addressField', type:"text", displayName: "Address", value: '', placeholder: "10 Lute Street, 012"},
+		{ id: 'xmppField', type:"text", displayName: "XMPP", value: '', placeholder: "jaskier@xmpp.thelute.com"},
 	];
 
 	let activeFields = [
@@ -98,6 +99,7 @@
 			website: form.target.websiteField ? form.target.websiteField.value : "",
 			comment: form.target.commentField ? form.target.commentField.value : "",
 			address: form.target.addressField ? form.target.addressField.value : "",
+			xmpp: form.target.xmppField ? form.target.xmppField.value : "",
 		});
 	}
 

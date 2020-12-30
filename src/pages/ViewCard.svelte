@@ -26,13 +26,14 @@
     }
 
     let contactDetails = {
-		name: "",
-		title: "",
-		email: "",
-		phone: "",
-    	website: "",
-		comment: "",
-		address: "",
+        name: "",
+        title: "",
+        email: "",
+        phone: "",
+        website: "",
+        comment: "",
+        address: "",
+        xmpp: "",
     };
 
     let loading = true;
@@ -54,7 +55,8 @@
             phone: getVCardProperty(VCardObj, "tel"),
             website: getVCardProperty(VCardObj, "url"),
             comment: getVCardProperty(VCardObj, "note"),
-            address: getVCardProperty(VCardObj, "adr")
+            address: getVCardProperty(VCardObj, "adr"),
+            xmpp: getVCardProperty(VCardObj, "X-JABBER"),
         }
         loading = false;
     }
@@ -80,6 +82,7 @@
         website = {contactDetails.website}
         comment = {contactDetails.comment}
         address = {contactDetails.address}
+        xmpp = {contactDetails.xmpp}
         /> 
         <div class="create-footer-link" in:fly="{{ y: -20, duration: 600, delay:800, easing: backOut}}">
             <a href="https://qcard.link">Create your own <strong>QCard</strong></a>
