@@ -112,6 +112,7 @@
 	export let website = "";
 	export let comment = "";
 	export let address = "";
+	export let xmpp = "";
 
 	export let vCardString;
 	export let selfLink;
@@ -131,11 +132,13 @@
 		setVCardProperty("url", website);
 		setVCardProperty("note", comment);
 		setVCardProperty("adr", address);
+		setVCardProperty("X-JABBER", xmpp);
 
 		vCardString = generateVCardString(
 			vCardObj,
 			true
 		);
+
 
 		selfLink = getSelfLink();
 	};
@@ -243,7 +246,7 @@
 		</div>
 
 
-		{#if email || phone || website || address}
+		{#if email || phone || website || address || xmpp}
 		<div class="contact-methods">
 			{#if email}
 			<div class="contact-method-item">
@@ -257,6 +260,14 @@
 			<div class="contact-method-item">
 				<a href="tel:{phone}" alt={phone}>
 					<img src="/icons/phone.svg" alt="Phone Icon"/>
+				</a>
+			</div>
+			{/if}
+
+			{#if xmpp}
+			<div class="contact-method-item">
+				<a href="xmpp:{xmpp}" target="_blank" alt="{xmpp}">
+					<img src="/icons/xmpp.svg" alt="XMPP icon"/>
 				</a>
 			</div>
 			{/if}

@@ -16,6 +16,7 @@
     	website: "",
 		comment: "",
 		address: "",
+		xmpp: "",
     };
 
 	// sleep time expects milliseconds
@@ -60,6 +61,7 @@
 				website = {contactDetails.website}
 				comment = {contactDetails.comment}
 				address = {contactDetails.address}
+				xmpp = {contactDetails.xmpp}
 			/>
 		</div>
 		{/if}
