@@ -92,6 +92,11 @@
 		border-top: 2px solid whitesmoke;
 	}
 
+	.contact-method-item img {
+		width:24px;
+		height: 24px;
+	}
+
 	.contact-method-item:first-child
 	{
 		border: none;
