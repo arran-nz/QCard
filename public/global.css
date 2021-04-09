@@ -98,6 +98,7 @@ input[type="range"] {
 }
 
 .button, button {
+	cursor: pointer;
 	outline: none;
 	border-radius: 5px;
 	background-color: whitesmoke;
