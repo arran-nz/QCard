@@ -67,6 +67,7 @@
 	// Import Event Dispatcher
 	import { createEventDispatcher } from 'svelte'
 	import { afterUpdate } from 'svelte';
+	import QCard from './plugins/qcard'
   	const dispatch = createEventDispatcher()
 
 	let fields = [
@@ -91,15 +92,17 @@
 		// Call the `Submitted` event for which parent
 		// componets can subscribe to.
 		dispatch("Submitted", 
-		{
-			name: form.target.nameField.value,
-			title: form.target.titleField ? form.target.titleField.value : "",
-		 	email: form.target.emailField ? form.target.emailField.value : "",
-			phone: form.target.phoneField ? form.target.phoneField.value : "",
-			website: form.target.websiteField ? form.target.websiteField.value : "",
-			comment: form.target.commentField ? form.target.commentField.value : "",
-			address: form.target.addressField ? form.target.addressField.value : "",
-			xmpp: form.target.xmppField ? form.target.xmppField.value : "",
+		{	
+			qCard: new QCard(
+				form.target.nameField ? form.target.nameField.value : "",
+				form.target.titleField ? form.target.titleField.value : "",
+				form.target.emailField ? form.target.emailField.value : "",
+				form.target.phoneField ? form.target.phoneField.value : "",
+				form.target.websiteField ? form.target.websiteField.value : "",
+				form.target.commentField ? form.target.commentField.value : "",
+				form.target.addressField ? form.target.addressField.value : "",
+				form.target.xmppField ? form.target.xmppField.value : ""
+			)
 		});
 	}
 
@@ -133,11 +136,11 @@
 			{#each activeFields as field (field.id)}
 				
 				<label class:required={field.required} for={field.id}>{field.displayName}</label>
-
+				{field.value}
 				{#if field.type == "textarea"}
-					<textarea class="field" placeholder={field.placeholder} id={field.id} required={field.required}></textarea>
+					<textarea class="field" placeholder={field.placeholder} id={field.id} required={field.required} value={field.value}></textarea>
 				{:else}
-				<input class="field" type={field.type} placeholder={field.placeholder} id={field.id} required={field.required}>
+				<input class="field" type={field.type} placeholder={field.placeholder} id={field.id} required={field.required} value={field.value}>
 				{/if}
 				
 			{/each}
@@ -147,7 +150,7 @@
 				<button class="additionalField" on:click|once="{() => makeFieldActive(field)}">{field.displayName}</button>
 			{/each}
 
-			<input class="button bold" type="submit" value="Create">
+			<input class="button bold" type="submit" value="Create"/>
 		</fieldset>
 	</form>
 </article>
