@@ -4,14 +4,17 @@
     import AppHeader from '../AppHeader.svelte'; 
     import Footer from '../Footer.svelte';
     import QRCode from '../QRCode.svelte';
+    import QCard from "../plugins/qcard";
 
-    let name = "Kim"
-    let title = "DevOps Engineer"
-    let comment = "We met at the 2021 FOSS Conference in Amsterdamn! 🍺🍺"
-    let phone = "+555"
-    let email = "null@example.com"
-    let sampleVCard = "";
-    let sampleVCardLink = "";
+    let qCard = new QCard(
+        "Julia",
+        "Senior Hacker",
+        "Julia@example.com",
+        "+555",
+        "https://qcard.link",
+        "We met at the 2021 FOSS Conference in Amsterdamn! 🍺🍺"
+    )
+
 </script>
 <article class="limit-width mx-auto">
 
@@ -31,16 +34,7 @@
         </div>
 
         <div class="media card">
-            <ContactCard 
-                name = {name}
-                title = {title}
-                comment = {comment}
-                phone = {phone}
-                email = {email}
-                
-                bind:vCardString={sampleVCard}
-                bind:selfLink={sampleVCardLink}
-            />
+            <ContactCard {qCard} />
         </div>
     </div>
 
@@ -72,16 +66,19 @@
             </p>
             <p>
                 The vCard is then encoded into <a target="_blank" href="https://en.wikipedia.org/wiki/Base64" alt="Base64 Wikipedia">Base64</a>
-                and appended to the URL <code>{sampleVCardLink.substring(0, 40)}...</code>
+                and appended to the URL <code>{qCard.toUrl().substring(0, 40)}...</code>
             </p>
+            <br />
+
             <p>
                 This URL is subsequently stored in the QR code at the top of a QCard.
             </p>
             <p>
                 When the QCard is visited, we simply decode the data and display it!
             </p>
+            <br />
             <p>
-                Completely <strong>knowledgeless</strong>!
+                Completely client-side and <strong>knowledgeless</strong>!
             </p>
             
 
@@ -89,13 +86,13 @@
         <div class="flex-code media">
 
             <pre>
-                {sampleVCard}
+                {qCard.toVCardString()}
             </pre>
             
             <img class="icon" src="/icons/arrow-down.svg" alt="Arrow pointing down"/>
 
             <div class="qrcode mx-auto">
-                <QRCode dataToEncode = {sampleVCardLink}/>
+                <QRCode dataToEncode = {qCard.toUrl()}/>
             </div>
         </div>
     </div>
@@ -105,7 +102,7 @@
     <div class="flex-container flex-dir-reverse">
         <div class="explaination center">
             <img style="width:50%" class="mx-auto" src="/images/undraw_professional_card.svg" alt="A person showing their personal information card"/>
-            <h1>You know what to do</h1>
+            <h1>You know what to do!</h1>
             <a href="https://qcard.link/create" class="mx-auto bold button">Create a QCard</a>
         </div>
     </div>

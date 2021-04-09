@@ -7,22 +7,26 @@
 	import CreateForm from '../CreateForm.svelte';
 	import AppHeader from '../AppHeader.svelte';
 	import Footer from '../Footer.svelte';
+	import { fromUrl } from '../plugins/qcardFactory';
+	import { onMount } from 'svelte';
+	import { writable} from 'svelte/store';
+	import { fromNothing } from '../plugins/qcardFactory'
 
-	let contactDetails = {
-		name: "",
-		title: "",
-		email: "",
-		phone: "",
-    	website: "",
-		comment: "",
-		address: "",
-		xmpp: "",
-    };
+	let qCard = fromNothing()
+	let existingQCard;
 
 	// sleep time expects milliseconds
 	function sleep (time) {
 		return new Promise((resolve) => setTimeout(resolve, time));
 	}
+
+	onMount(() => {
+		existingQCard = fromUrl(window.location.href.toString())
+		if (existingQCard != undefined){
+			qCard = existingQCard
+		}
+	})
+
 
 </script>
 
@@ -31,15 +35,15 @@
 	<div id="app-header" class="mx-auto">
 		<AppHeader/>
 	</div>
-
 	<div class="flex-container mx-auto limit-width">
 		<div id="create-form" class="mx-auto limit-width">
 			<CreateForm
+				{existingQCard}
+
 				on:Submitted = { 
 					event =>
 					{
-						contactDetails = event.detail;
-						
+						qCard = event.detail.qCard;
 						// Must wait until the DOM object is rendered before scrolling.
 						sleep(50).then(() => {
 							document.getElementById("created-card").scrollIntoView({ behavior: "smooth", block: "center" });
@@ -50,19 +54,10 @@
 			/>
 		</div>
 
-		{#if contactDetails.name != ""}
+		{#if qCard.name != ""}
 		<div class="spacer" />
 		<div id="created-card" class="mx-auto">
-			<ContactCard 
-				name = {contactDetails.name}
-				title = {contactDetails.title}
-				email = {contactDetails.email}
-				phone = {contactDetails.phone}
-				website = {contactDetails.website}
-				comment = {contactDetails.comment}
-				address = {contactDetails.address}
-				xmpp = {contactDetails.xmpp}
-			/>
+			<ContactCard {qCard}/>
 		</div>
 		{/if}
 	</div>

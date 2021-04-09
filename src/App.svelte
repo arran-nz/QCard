@@ -5,8 +5,8 @@
     import { fade } from 'svelte/transition';
     
     import Home from "./pages/Home.svelte";
-    import Create from "./pages/CreateCard.svelte";
-    import View from "./pages/ViewCard.svelte";
+    import Create from "./pages/Create.svelte";
+    import View from "./pages/View.svelte";
     
     export let url = "";
 

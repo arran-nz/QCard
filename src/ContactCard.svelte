@@ -106,72 +106,19 @@
 
 <script>
 	import Toast from 'svelte-toast'
+	import QRCode from './QRCode.svelte'
 
-	import QRCode from './QRCode.svelte';
-	import { generateVCardString } from './plugins/vcard.js';
+	export let qCard;
 
-	export let name;
-	export let title = "";
-	export let email = "";
-	export let phone = "";
-	export let website = "";
-	export let comment = "";
-	export let address = "";
-	export let xmpp = "";
-
-	export let vCardString;
-	export let selfLink;
-	
-	let viewCardPrefixUrl = "https://qcard.link/card/#";
-
-	let vCardObj = {};
-
-	// Reactive to any variable changes in this component
-	$: {
-		var n = ["", name, "", "", ""];
-		setVCardProperty("fn", name);
-		setVCardProperty("n", n);
-		setVCardProperty("title", title);
-		setVCardProperty("email", email);
-		setVCardProperty("tel", phone);
-		setVCardProperty("url", website);
-		setVCardProperty("note", comment);
-		setVCardProperty("adr", address);
-		setVCardProperty("X-JABBER", xmpp);
-
-		vCardString = generateVCardString(
-			vCardObj,
-			true
-		);
-
-
-		selfLink = getSelfLink();
-	};
-
-	function setVCardProperty(key, value){
-		vCardObj[key] = [
-			{
-				'value': value,
-			}
-		]
-	};
-
-	function getSelfLink(){
-		var encodedVCard = encodeData(vCardString);
-		var selfLink = viewCardPrefixUrl + encodedVCard;
-		return selfLink;
-	}
-
-	function encodeData(str) {
-		// https://attacomsian.com/blog/javascript-base64-encode-decode
-		// first we use encodeURIComponent to get percent-encoded UTF-8,
-		// then we convert the percent encodings into raw bytes which
-		// can be fed into btoa.
-		return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-			function toSolidBytes(match, p1) {
-				return String.fromCharCode('0x' + p1);
-		}));
-	}
+	let selfLink = qCard.toUrl();
+	let name = qCard.name
+	let title = qCard.title
+	let email = qCard.email
+	let phone = qCard.phone
+	let website = qCard.website
+	let comment = qCard.comment
+	let address = qCard.address
+	let xmpp = qCard.xmpp
 
 	function DownloadVCard(){
 		var fileName = name + ".vcf";
