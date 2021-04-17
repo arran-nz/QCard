@@ -1,5 +1,5 @@
 <script>
-    import { Router, Route, Link } from "svelte-routing";
+    import { Router, Route } from "svelte-routing";
     import { navigate } from "svelte-routing";
 
     import { fade } from 'svelte/transition';
