@@ -65,26 +65,26 @@
 
 <script>
 	// Import Event Dispatcher
-	import { createEventDispatcher } from 'svelte'
-	import { afterUpdate } from 'svelte';
-	import QCard from './plugins/qcard'
+	import { beforeUpdate, afterUpdate, createEventDispatcher } from 'svelte'
+	import QCard from './plugins/qcard'	
+
   	const dispatch = createEventDispatcher()
 
-	let fields = [
-		{ id: 'titleField', type:"text", displayName: "Title", value: '', placeholder: "Singer, Poet, Lute Player"},
-		{ id: 'emailField', type:"text", displayName: "Email", value: '', placeholder: "info@balladsfromjaskier.com"},
-		{ id: 'phoneField', type:"tel", displayName: "Phone", value: '', placeholder: "+000 000"},
-		{ id: 'websiteField', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
-		{ id: 'commentField', type:"textarea", displayName: "Comment", value: '', placeholder: "Yes, yes, yes. You never get involved. Except you actually do, all of the time."},
-		{ id: 'addressField', type:"text", displayName: "Address", value: '', placeholder: "10 Lute Street, 012"},
-		{ id: 'xmppField', type:"text", displayName: "XMPP", value: '', placeholder: "jaskier@xmpp.thelute.com"},
+	const fields = [
+		{ required: true, id: 'name', displayName: "Name", value: '', placeholder: "Jaskier"},
+		{ id: 'title', type:"text", displayName: "Title", value: '', placeholder: "Singer, Poet, Lute Player"},
+		{ id: 'email', type:"text", displayName: "Email", value: '', placeholder: "info@balladsfromjaskier.com"},
+		{ id: 'phone', type:"tel", displayName: "Phone", value: '', placeholder: "+000 000"},
+		{ id: 'website', type:"url", displayName: "Website", value: '', placeholder: "https://thelute.com"},
+		{ id: 'comment', type:"textarea", displayName: "Comment", value: '', placeholder: "Yes, yes, yes. You never get involved. Except you actually do, all of the time."},
+		{ id: 'address', type:"text", displayName: "Address", value: '', placeholder: "10 Lute Street, 012"},
+		{ id: 'xmpp', type:"text", displayName: "XMPP", value: '', placeholder: "jaskier@xmpp.thelute.com"},
 	];
 
-	let activeFields = [
-		{ required: true, id: 'nameField', displayName: "Name", value: '', placeholder: "Jaskier"},
-	];
+	let activeFields = []
 
 	let elementIdToFocus;
+	export let existingQCard;
 
 	// Handle the form submit
 	function handleSubmit(form)
@@ -94,21 +94,20 @@
 		dispatch("Submitted", 
 		{	
 			qCard: new QCard(
-				form.target.nameField ? form.target.nameField.value : "",
-				form.target.titleField ? form.target.titleField.value : "",
-				form.target.emailField ? form.target.emailField.value : "",
-				form.target.phoneField ? form.target.phoneField.value : "",
-				form.target.websiteField ? form.target.websiteField.value : "",
-				form.target.commentField ? form.target.commentField.value : "",
-				form.target.addressField ? form.target.addressField.value : "",
-				form.target.xmppField ? form.target.xmppField.value : ""
+				form.target.name? form.target.name.value : "",
+				form.target.title? form.target.title.value : "",
+				form.target.email? form.target.email.value : "",
+				form.target.phone? form.target.phone.value : "",
+				form.target.website? form.target.website.value : "",
+				form.target.comment? form.target.comment.value : "",
+				form.target.address? form.target.address.value : "",
+				form.target.xmpp? form.target.xmpp.value : ""
 			)
 		});
 	}
 
 	/// Move a field from `fields` to `activeFields`
-	function makeFieldActive(field)
-	{
+	function makeFieldActive(field) {
 		activeFields = [...activeFields, field];
 		const index = fields.indexOf(field);
 		if (index > -1) {
@@ -120,12 +119,53 @@
 		
 	}
 
+	function makeRequiredFieldsActive() {
+		if (fields.map(x => x.required) !== activeFields.map(x => x.required)) {
+			console.log("Existing Card not defined")
+			fields.forEach(
+				field => {
+					if (field.required) {
+						console.log(field.id)
+						makeFieldActive(field)
+					}
+				}
+			)
+		}
+	}
+
 	afterUpdate(() => {
-		if (elementIdToFocus != undefined)
-		{
-			document.getElementById(elementIdToFocus).focus();
+		if (elementIdToFocus != undefined) {
+			console.log(elementIdToFocus)
+			document.getElementById(elementIdToFocus)?.focus();
 		}
 	});
+
+	beforeUpdate(() =>{
+
+		if (existingQCard != undefined) {
+			// activeFields = []
+			// Iterate over each field in the QCard
+			Object.keys(existingQCard).map(propertyName => {
+				
+				// Iterate over each existing field
+				// Checking if the field in the form needs
+				// to be overwritten
+				[...fields].map(field => {
+					let value = existingQCard[propertyName]
+					if(field.id == propertyName && value != "") {
+						field.value = existingQCard[propertyName]
+						console.log(field)
+						makeFieldActive(field)
+					}
+				})
+			})
+
+			return
+		}
+
+		makeRequiredFieldsActive()
+
+	})
 
 </script>
 
@@ -136,7 +176,6 @@
 			{#each activeFields as field (field.id)}
 				
 				<label class:required={field.required} for={field.id}>{field.displayName}</label>
-				{field.value}
 				{#if field.type == "textarea"}
 					<textarea class="field" placeholder={field.placeholder} id={field.id} required={field.required} value={field.value}></textarea>
 				{:else}
