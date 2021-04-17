@@ -14,6 +14,10 @@
 		padding: 0.5em;
 	}
 
+	input[type="submit"] {
+		margin: 0.5em 0;
+	}
+
 	textarea {
 		height: 10vh;
 	}
