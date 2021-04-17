@@ -118,7 +118,7 @@
 	function downloadVCard(){
 		var fileName = qCard.name + ".vcf";
 		var downloadElement = document.createElement("a");
-		downloadElement.setAttribute("href", "data:text/vcard:charset=utf-8," + encodeURIComponent(vCardString));
+		downloadElement.setAttribute("href", "data:text/vcard:charset=utf-8," + encodeURIComponent(qCard.toVCardString()));
 		downloadElement.setAttribute("download", fileName);
 		downloadElement.style.display = "none";
 
