@@ -7,22 +7,30 @@
 	import CreateForm from '../CreateForm.svelte';
 	import AppHeader from '../AppHeader.svelte';
 	import Footer from '../Footer.svelte';
-	import { fromUrl } from '../plugins/qcardFactory';
+	import { fromNothing, fromUrl } from '../plugins/qcardFactory';
 	import { onMount } from 'svelte';
-	import { writable} from 'svelte/store';
-	import { fromNothing } from '../plugins/qcardFactory'
 
-	let qCard = fromNothing()
 	let existingQCard;
+	let qCard = fromNothing()
 
 	// sleep time expects milliseconds
 	function sleep (time) {
 		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
+	function onFormSubmitted(event) {
+		qCard = event.detail.qCard;
+		// Must wait until the DOM object is rendered before scrolling.
+		sleep(50).then(() => {
+			document.getElementById("created-card")?.scrollIntoView({ behavior: "smooth", block: "center" });
+		});
+	}
+
 	onMount(() => {
-		existingQCard = fromUrl(window.location.href.toString())
-		if (existingQCard != undefined){
+		let qCardFromUrl = fromUrl(window.location.href.toString())
+		if (qCardFromUrl == undefined) return
+		if (qCardFromUrl.name != "") {
+			existingQCard = qCardFromUrl
 			qCard = existingQCard
 		}
 	})
@@ -37,24 +45,16 @@
 	</div>
 	<div class="flex-container mx-auto limit-width">
 		<div id="create-form" class="mx-auto limit-width">
-			<CreateForm
-				{existingQCard}
+			{#if existingQCard}
+				<h2>Editing {existingQCard.name}'s QCard</h2>
+				<CreateForm {existingQCard} on:Submitted={e => onFormSubmitted(e)} />
+			{:else}
+				<CreateForm on:Submitted={e => onFormSubmitted(e)}  />
+			{/if}
 
-				on:Submitted = { 
-					event =>
-					{
-						qCard = event.detail.qCard;
-						// Must wait until the DOM object is rendered before scrolling.
-						sleep(50).then(() => {
-							document.getElementById("created-card").scrollIntoView({ behavior: "smooth", block: "center" });
-						});
-
-					}
-				}
-			/>
 		</div>
 
-		{#if qCard.name != ""}
+		{#if qCard.name != undefined}
 		<div class="spacer" />
 		<div id="created-card" class="mx-auto">
 			<ContactCard {qCard}/>
