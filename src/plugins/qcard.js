@@ -89,7 +89,7 @@ class QCard {
     }
 
     setXmpp(vCard) {
-        this.setProperty(vCard, 'JABBER', this.xmpp)
+        this.setProperty(vCard, 'X-JABBER', this.xmpp)
     }
 
 }
