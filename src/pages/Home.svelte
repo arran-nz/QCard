@@ -5,15 +5,57 @@
     import QRCode from '../QRCode.svelte';
     import QCard from "../plugins/qcard";
     import { link } from 'svelte-routing'
+    import { onMount} from 'svelte'
+import QrCode from '../QRCode.svelte';
 
-    let qCard = new QCard(
-        "Julia",
-        "Senior Hacker",
-        "Julia@example.com",
-        "+555",
-        "https://qcard.link",
-        "We met at the 2021 FOSS Conference in Amsterdamn! 🍺🍺"
-    )
+
+    let sampleQCards = [
+
+        new QCard(
+            "Lukas",
+            "Frontend Developer",
+            "Lukas@example.com",
+            "+555",
+            "https://qcard.link",
+            "We met at the 2021 FOSS Conference in Amsterdam! 🍺🍺"
+        ),
+
+        new QCard(
+            "Julia",
+            "Digital Prophet",
+            "Julia@example.com",
+            undefined,
+            "https://qcard.link",
+            "I probably gave you amazing advice 🔮",
+            "Austria"
+        ),
+
+        new QCard(
+            "Emma",
+            "Sales Consultant",
+            "Emma@example.com",
+            "+555",
+            undefined,
+            "If you're interested in trying out our product, give me a call!",
+            undefined,
+            "emma@xmpp.org"
+        )
+
+    ]
+
+    let sampleIndex = 0
+    let qCard = sampleQCards[0]
+
+    function cycleSampleQCard(){
+        sampleIndex++
+        if (sampleIndex >= sampleQCards.length) sampleIndex = 0
+        qCard = sampleQCards[sampleIndex]
+        console.log(sampleIndex)
+    }
+
+    onMount(() => {
+        setInterval(cycleSampleQCard, 5000)
+    })
 
 </script>
 <article class="limit-width mx-auto">
