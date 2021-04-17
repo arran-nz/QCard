@@ -46,7 +46,6 @@
 	<div class="flex-container mx-auto limit-width">
 		<div id="create-form" class="mx-auto limit-width">
 			{#if existingQCard}
-				<h2>Editing {existingQCard.name}'s QCard</h2>
 				<CreateForm {existingQCard} on:Submitted={e => onFormSubmitted(e)} />
 			{:else}
 				<CreateForm on:Submitted={e => onFormSubmitted(e)}  />
