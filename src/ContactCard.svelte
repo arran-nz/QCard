@@ -31,7 +31,7 @@
 	#comment p {
 		margin: 5px 10px;
 		font-size: 1em;
-		word-break: break-all;
+		word-break: break-word;
 	}
 
 	a img {
