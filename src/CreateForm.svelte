@@ -121,11 +121,9 @@
 
 	function makeRequiredFieldsActive() {
 		if (fields.map(x => x.required) !== activeFields.map(x => x.required)) {
-			console.log("Existing Card not defined")
 			fields.forEach(
 				field => {
 					if (field.required) {
-						console.log(field.id)
 						makeFieldActive(field)
 					}
 				}
@@ -135,7 +133,6 @@
 
 	afterUpdate(() => {
 		if (elementIdToFocus != undefined) {
-			console.log(elementIdToFocus)
 			document.getElementById(elementIdToFocus)?.focus();
 		}
 	});
@@ -154,7 +151,6 @@
 					let value = existingQCard[propertyName]
 					if(field.id == propertyName && value != "") {
 						field.value = existingQCard[propertyName]
-						console.log(field)
 						makeFieldActive(field)
 					}
 				})
