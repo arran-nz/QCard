@@ -24,7 +24,7 @@
 
 <article>
   
-  <a href="https://qcard.link" alt="Reload the application">
+  <a use:link href="/" alt="Reload the application">
     <h1><strong>QCard</strong>.link</h1>
   </a>
 
@@ -33,3 +33,7 @@
   </p>
 
 </article>
+
+<script>
+    import { link } from 'svelte-routing'
+</script>

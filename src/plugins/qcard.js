@@ -2,9 +2,6 @@
 import { generateVCardString } from './vcard.js';
 import { encode } from './base64.js';
 
-const VIEW_PREFIX = "http://localhost:5000/card/#";
-
-
 class QCard {
 
     constructor(
@@ -27,8 +24,16 @@ class QCard {
         this.xmpp = xmpp
     }
 
-    toUrl() {
-        return VIEW_PREFIX + encode(this.toVCardString())
+    toViewUrl() {
+        return `/card/#${this.toEncodedString()}`
+    }
+
+    toEditUrl() {
+        return `/create/#${this.toEncodedString()}`
+    }
+
+    toEncodedString() {
+        return encode(this.toVCardString())
     }
 
     toVCardString() {

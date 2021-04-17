@@ -1,10 +1,10 @@
 <script>
-    import { Link } from "svelte-routing";
     import ContactCard from '../ContactCard.svelte'; 
     import AppHeader from '../AppHeader.svelte'; 
     import Footer from '../Footer.svelte';
     import QRCode from '../QRCode.svelte';
     import QCard from "../plugins/qcard";
+    import { link } from 'svelte-routing'
 
     let qCard = new QCard(
         "Julia",
@@ -30,7 +30,7 @@
                 <li>⚡ Super <strong>light-weight</strong>, optimzed for cellular internet</li>
             </ul>    
             
-            <a href="https://qcard.link/create" class="bold button">Create a QCard</a>
+            <a use:link href="/create" class="bold button">Create a QCard</a>
         </div>
 
         <div class="media card">
@@ -66,7 +66,7 @@
             </p>
             <p>
                 The vCard is then encoded into <a target="_blank" href="https://en.wikipedia.org/wiki/Base64" alt="Base64 Wikipedia">Base64</a>
-                and appended to the URL <code>{qCard.toUrl().substring(0, 40)}...</code>
+                and appended to the URL <code>{qCard.toViewUrl().substring(0, 40)}...</code>
             </p>
             <br />
 
@@ -92,7 +92,7 @@
             <img class="icon" src="/icons/arrow-down.svg" alt="Arrow pointing down"/>
 
             <div class="qrcode mx-auto">
-                <QRCode dataToEncode = {qCard.toUrl()}/>
+                <QRCode dataToEncode={`https://qcard.link${qCard.toViewUrl()}`}/>
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
         <div class="explaination center">
             <img style="width:50%" class="mx-auto" src="/images/undraw_professional_card.svg" alt="A person showing their personal information card"/>
             <h1>You know what to do!</h1>
-            <a href="https://qcard.link/create" class="mx-auto bold button">Create a QCard</a>
+            <a use:link href="/create" class="mx-auto bold button">Create a QCard</a>
         </div>
     </div>
 
