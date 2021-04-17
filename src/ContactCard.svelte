@@ -64,6 +64,9 @@
 		background-color: #D64550;
 	}
 
+	button.edit {
+		padding: 0.2em 0.5em;
+	}
 	
 	/*Contact Info*/
 
@@ -107,12 +110,13 @@
 <script>
 	import Toast from 'svelte-toast'
 	import QRCode from './QRCode.svelte'
+	import { navigate } from "svelte-routing";
 
 	export let qCard;
-	$: selfLink = qCard.toUrl()
+	$: selfLink = `https://qcard.link${qCard.toViewUrl()}`
 
-	function DownloadVCard(){
-		var fileName = name + ".vcf";
+	function downloadVCard(){
+		var fileName = qCard.name + ".vcf";
 		var downloadElement = document.createElement("a");
 		downloadElement.setAttribute("href", "data:text/vcard:charset=utf-8," + encodeURIComponent(vCardString));
 		downloadElement.setAttribute("download", fileName);
@@ -123,11 +127,11 @@
 		document.body.removeChild(downloadElement);
 	}
 
-	function ShareQCard(){
+	function shareQCard(){
 		if (navigator.share) {
 			navigator.share({
-				title: name + "'s QCard'",
-				text: "Here's " + name + "'s contact information",
+				title: `${qCard.name}'s QCard`,
+				text: `Here's ${qCard.name}'s contact information`,
 				url: selfLink,
 			})
 				.then(() => console.log('Successful share'))
@@ -135,7 +139,7 @@
 		}
 	}
 
-	function CopySelfLink(){
+	function copySelfLink(){
 		// Thank you the World Wide Web <3
 		// https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
 		// Create new element
@@ -156,14 +160,18 @@
 		// Display Toast Notification to User.
 		var toast = new Toast();
 		toast.success(qCard.name + '\'s ' + 'QCard Copied');
+	}
 
+	function editQCard(){
+		navigate(`/create/#${qCard.toEncodedString()}`)
 	}
 
 </script>
 
-<article class="shadow">
-	<a href={selfLink} alt="QCard URL">
-		<QRCode dataToEncode = {selfLink}/>
+<article class="shadow" style="position:relative">
+
+	<a href={qCard.toViewUrl()} alt="View this QCard">
+		<QRCode dataToEncode={selfLink}/>
 	</a>
 
 	<hr>
@@ -239,17 +247,21 @@
 
 	<div class="button-container">
 
+		<button on:click={editQCard} alt="Edit the QCard" class="edit">
+			<img src="/icons/edit.svg" alt="Edit Icon"/>
+		</button>
+
 		{#if navigator.share}
-		<button on:click={ShareQCard} alt="Share this QCard's URL" class="share">
+		<button on:click={shareQCard} alt="Share this QCard's URL" class="share">
 			<img src="/icons/share.svg" alt="Share Icon"/>
 		</button>
 		{:else}
-		<button on:click={CopySelfLink} alt="Copy the URL of this QCard" class="copy">
+		<button on:click={copySelfLink} alt="Copy the URL of this QCard" class="copy">
 			<img src="/icons/copy.svg" alt="Copy Icon"/>
 		</button>
 		{/if}
 
-		<button on:click={DownloadVCard} alt="Download the VCard" class="download">
+		<button on:click={downloadVCard} alt="Download the VCard" class="download">
 			<img src="/icons/download.svg" alt="Download Icon"/>
 		</button>
 
