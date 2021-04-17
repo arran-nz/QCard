@@ -155,7 +155,7 @@
 
 		// Display Toast Notification to User.
 		var toast = new Toast();
-		toast.success(name + '\'s ' + 'QCard Copied');
+		toast.success(qCard.name + '\'s ' + 'QCard Copied');
 
 	}
 
