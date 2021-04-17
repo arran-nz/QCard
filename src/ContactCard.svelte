@@ -109,16 +109,7 @@
 	import QRCode from './QRCode.svelte'
 
 	export let qCard;
-
-	let selfLink = qCard.toUrl();
-	let name = qCard.name
-	let title = qCard.title
-	let email = qCard.email
-	let phone = qCard.phone
-	let website = qCard.website
-	let comment = qCard.comment
-	let address = qCard.address
-	let xmpp = qCard.xmpp
+	$: selfLink = qCard.toUrl()
 
 	function DownloadVCard(){
 		var fileName = name + ".vcf";
@@ -183,58 +174,58 @@
 
 			<header>
 				<h1>
-					{name}
+					{qCard.name}
 				</h1>
-				{#if title}
-				<h2>{title}</h2>
+				{#if qCard.title}
+				<h2>{qCard.title}</h2>
 				{/if}
 			</header>
 
-			{#if comment}
+			{#if qCard.comment}
 			<div id="comment">
-				<p>{comment}</p>
+				<p>{qCard.comment}</p>
 			</div>
 			{/if}
 		</div>
 
 
-		{#if email || phone || website || address || xmpp}
+		{#if qCard.email || qCard.phone || qCard.website || qCard.address || qCard.xmpp}
 		<div class="contact-methods">
-			{#if email}
+			{#if qCard.email}
 			<div class="contact-method-item">
-				<a href="mailto:{email}" alt="{email}" target="_blank">
+				<a href="mailto:{qCard.email}" alt="{qCard.email}" target="_blank">
 					<img src="/icons/inbox.svg" alt="Email Icon"/>
 				</a>
 			</div>
 			{/if}
 
-			{#if phone}
+			{#if qCard.phone}
 			<div class="contact-method-item">
-				<a href="tel:{phone}" alt={phone}>
+				<a href="tel:{qCard.phone}" alt={qCard.phone}>
 					<img src="/icons/phone.svg" alt="Phone Icon"/>
 				</a>
 			</div>
 			{/if}
 
-			{#if xmpp}
+			{#if qCard.xmpp}
 			<div class="contact-method-item">
-				<a href="xmpp:{xmpp}" target="_blank" alt="{xmpp}">
+				<a href="xmpp:{qCard.xmpp}" target="_blank" alt="{qCard.xmpp}">
 					<img src="/icons/xmpp.svg" alt="XMPP icon"/>
 				</a>
 			</div>
 			{/if}
 
-			{#if website}
+			{#if qCard.website}
 			<div class="contact-method-item">
-				<a href={website} target="_blank" alt="Website provided by {name}">
+				<a href={qCard.website} target="_blank" alt="Website provided by {qCard.name}">
 					<img src="/icons/link.svg" alt="External Link Icon"/>
 				</a>
 			</div>
 			{/if}
 
-			{#if address}
+			{#if qCard.address}
 			<div class="contact-method-item">
-				<a href="https://www.openstreetmap.org/search?query={address}" target="_blank" alt="{address}">
+				<a href="https://www.openstreetmap.org/search?query={qCard.address}" target="_blank" alt="{qCard.address}">
 					<img src="/icons/map-pin.svg" alt="Location icon"/>
 				</a>
 			</div>
