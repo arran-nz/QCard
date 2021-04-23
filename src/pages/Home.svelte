@@ -6,8 +6,6 @@
     import QCard from "../plugins/qcard";
     import { link } from 'svelte-routing'
     import { onMount} from 'svelte'
-import QrCode from '../QRCode.svelte';
-
 
     let sampleQCards = [
 
