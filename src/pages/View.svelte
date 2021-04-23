@@ -10,11 +10,6 @@
     let canEdit = false;
     let qCard;
 
-    const renderEdit = (localSHA, qCardSHA) => {
-        console.log(`${localSHA} == ${qCardSHA}`)
-        if (localSHA === qCardSHA) canEdit = true;
-    }
-
     onMount(() => {
         qCard = fromUrl(window.location.href.toString())
         if (qCard == undefined)
@@ -23,11 +18,13 @@
         }
         loading = false
 
+        // If the LocalSHA and currently loaded QCardSHA are the same
+        // Allow the card to show to EDIT button
         let localSHA = localStorage.getItem('QCard_SHA256')
         if (localSHA)
         {
             qCard.toSHA256().then(qCardSHA => {
-                renderEdit(localSHA, qCardSHA)
+                if (localSHA === qCardSHA) canEdit = true;
             })
         }
         
