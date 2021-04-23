@@ -114,6 +114,7 @@
 	import QRCode from './QRCode.svelte'
 	import { navigate } from "svelte-routing";
 
+	export let canEdit = false;
 	export let qCard;
 	$: selfLink = `https://qcard.link${qCard.toViewUrl()}`
 
@@ -249,21 +250,23 @@
 
 	<div class="button-container">
 
-		<button on:click={editQCard} alt="Edit the QCard" class="edit">
+		{#if canEdit}
+		<button on:click={editQCard} title="Edit the QCard" class="edit">
 			<img src="/icons/edit.svg" alt="Edit Icon"/>
 		</button>
+		{/if}
 
 		{#if navigator.share}
-		<button on:click={shareQCard} alt="Share this QCard's URL" class="share">
+		<button on:click={shareQCard} title="Share this QCard's URL" class="share">
 			<img src="/icons/share.svg" alt="Share Icon"/>
 		</button>
 		{:else}
-		<button on:click={copySelfLink} alt="Copy the URL of this QCard" class="copy">
+		<button on:click={copySelfLink} title="Copy the URL of this QCard" class="copy">
 			<img src="/icons/copy.svg" alt="Copy Icon"/>
 		</button>
 		{/if}
 
-		<button on:click={downloadVCard} alt="Download the VCard" class="download">
+		<button on:click={downloadVCard} title="Download the VCard" class="download">
 			<img src="/icons/download.svg" alt="Download Icon"/>
 		</button>
 
