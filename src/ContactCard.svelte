@@ -65,8 +65,10 @@
 	}
 
 	button.edit {
+		margin-right: auto;
 		padding: 0.2em 0.5em;
 	}
+
 	
 	/*Contact Info*/
 
