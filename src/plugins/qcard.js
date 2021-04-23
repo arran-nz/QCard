@@ -2,6 +2,18 @@
 import { generateVCardString } from './vcard.js';
 import { encode } from './base64.js';
 
+// https://stackoverflow.com/questions/5111164/are-there-any-one-way-hashing-functions-available-in-native-javascript
+async function SHA256(data) {
+    return Array.prototype.map
+        .call(
+        new Uint8Array(
+            await crypto.subtle.digest("SHA-256", new TextEncoder().encode(data))
+        ),
+        (x) => ("0" + x.toString(16)).slice(-2)
+        )
+        .join("");
+}
+
 class QCard {
 
     constructor(
@@ -38,6 +50,10 @@ class QCard {
 
     toVCardString() {
         return generateVCardString(this.getVCard())
+    }
+
+    async toSHA256() {
+        return await SHA256(this.toEncodedString())
     }
 
     setProperty(vCard, key, value) {

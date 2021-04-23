@@ -18,8 +18,14 @@
 		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
+	
 	function onFormSubmitted(event) {
 		qCard = event.detail.qCard;
+
+		qCard.toSHA256().then(x => {
+			localStorage.setItem('QCard_SHA256', x)
+		})
+
 		// Must wait until the DOM object is rendered before scrolling.
 		sleep(50).then(() => {
 			document.getElementById("created-card")?.scrollIntoView({ behavior: "smooth", block: "center" });

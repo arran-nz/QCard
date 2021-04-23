@@ -7,7 +7,13 @@
     import { onMount } from 'svelte';
 
     let loading = true;
+    let canEdit = false;
     let qCard;
+
+    const renderEdit = (localSHA, qCardSHA) => {
+        console.log(`${localSHA} == ${qCardSHA}`)
+        if (localSHA === qCardSHA) canEdit = true;
+    }
 
     onMount(() => {
         qCard = fromUrl(window.location.href.toString())
@@ -15,8 +21,16 @@
         {
             window.location.replace("/");
         }
-
         loading = false
+
+        let localSHA = localStorage.getItem('QCard_SHA256')
+        if (localSHA)
+        {
+            qCard.toSHA256().then(qCardSHA => {
+                renderEdit(localSHA, qCardSHA)
+            })
+        }
+        
     })
 
 
@@ -32,7 +46,7 @@
 {#if !loading}
 <article>
     <div id="contact-card-container" in:fly="{{ x: -100, duration: 600, easing: backOut }}">
-        <ContactCard {qCard} /> 
+        <ContactCard {qCard} {canEdit}/> 
         <div class="create-footer-link" in:fly="{{ y: -20, duration: 600, delay:800, easing: backOut}}">
             <a href="https://qcard.link">Create your own <strong>QCard</strong></a>
         </div>
