@@ -48,7 +48,6 @@
         sampleIndex++
         if (sampleIndex >= sampleQCards.length) sampleIndex = 0
         qCard = sampleQCards[sampleIndex]
-        console.log(sampleIndex)
     }
 
     onMount(() => {
