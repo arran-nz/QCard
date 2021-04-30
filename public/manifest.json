@@ -5,6 +5,11 @@
     "start_url": "create/",
     "display": "standalone",
     "theme_color": "#e30613",
+    "intent_filters": {
+        "scope_url_scheme": "https",
+        "scope_url_host": "qcard.link",
+        "scope_url_path": "/"
+    },
     "icons": [
         {
           "src": "/icons/meta/icon-128x128.png",
