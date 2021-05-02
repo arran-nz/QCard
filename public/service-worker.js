@@ -28,33 +28,62 @@ self.addEventListener('install', (evt) => {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (evt) => {
-  console.log('[ServiceWorker] Activate');
-  // Remove previous cached data from disk.
-  evt.waitUntil(
-      caches.keys().then((keyList) => {
-        return Promise.all(keyList.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('[ServiceWorker] Removing old cache', key);
-            return caches.delete(key);
-          }
-        }));
-      })
-  );
+self.addEventListener('fetch', function(event) {
 
-  self.clients.claim();
+	// Clone the request for fetch and cache
+	// A request is a stream and can be consumed only once.
+	var fetchRequest = event.request.clone(),
+		cacheRequest = event.request.clone();
+
+	// Respond with content from fetch or cache
+	event.respondWith(
+
+		// Try fetch
+		fetch(fetchRequest)
+
+			// when fetch is successful, we update the cache
+			.then(function(response) {
+
+				// A response is a stream and can be consumed only once.
+				// Because we want the browser to consume the response,
+				// as well as cache to consume the response, we need to
+				// clone it so we have 2 streams
+				var responseToCache = response.clone();
+
+				// and update the cache
+				caches
+					.open(self.CACHE_NAME)
+					.then(function(cache) {
+
+						// Clone the request again to use it
+						// as the key for our cache
+						var cacheSaveRequest = event.request.clone();
+						cache.put(cacheSaveRequest, responseToCache);
+
+					});
+
+				// Return the response stream to be consumed by browser
+				return response;
+
+			})
+
+			// when fetch times out or fails
+			.catch(function(err) {
+
+				// Return the promise which
+				// resolves on a match in cache for the current request
+				// ot rejects if no matches are found
+				return caches.match(cacheRequest);
+
+			})
+	);
 });
 
-self.addEventListener('fetch', (evt) => {
-  console.log('[ServiceWorker] Fetch', evt.request.url);
-  evt.respondWith((async () => {
-    const r = await caches.match(e.request);
-    console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
-    if (r) { return r; }
-    const response = await fetch(e.request);
-    const cache = await caches.open(cacheName);
-    console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
-    cache.put(e.request, response.clone());
-    return response;
-  })());
+// Now we need to clean up resources in the previous versions
+// of Service Worker scripts
+self.addEventListener('activate', function(event) {
+
+	// Destroy the cache
+	event.waitUntil(caches.delete(self.CACHE_NAME));
+
 });
