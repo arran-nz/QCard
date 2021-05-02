@@ -1,0 +1,6 @@
+{$ADDRESS}:8080 {
+    tls ./certs/qcard.localdomain+4.pem ./certs/qcard.localdomain+4-key.pem
+    reverse_proxy 127.0.0.1:5000
+}
+
+
