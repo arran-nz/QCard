@@ -1,6 +1,8 @@
 <script>
     import { fly } from 'svelte/transition';
     import { backOut } from 'svelte/easing';
+    import { link } from 'svelte-routing'
+
     import ContactCard from '../ContactCard.svelte';
 
     import { fromUrl } from '../plugins/qcardFactory';
@@ -45,7 +47,7 @@
     <div id="contact-card-container" in:fly="{{ x: -100, duration: 600, easing: backOut }}">
         <ContactCard {qCard} {canEdit}/> 
         <div class="create-footer-link" in:fly="{{ y: -20, duration: 600, delay:800, easing: backOut}}">
-            <a href="https://qcard.link">Create your own <strong>QCard</strong></a>
+            <a use:link href="/">Create your own <strong>QCard</strong></a>
         </div>
     </div>
 </article>
