@@ -67,6 +67,7 @@
                 <li>🛡️ Completely <strong>private</strong> by design - All contact data is in the QR code</li>
                 <li>💚 An alternative to Business Cards that is <strong>waste-free</strong></li>
                 <li>⚡ Super <strong>light-weight</strong>, optimzed for cellular internet</li>
+                <li>📜 Works offline!</li>
             </ul>    
             
             <a use:link href="/create" class="bold button">Create a QCard</a>
