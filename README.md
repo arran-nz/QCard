@@ -46,11 +46,48 @@ Cool, here are some examples - Feel free to add your own!
 
  - [QCardGeneration](./examples/QCardGeneration.md)
 
-## Contributions
-
-Welcome!
-
 ## Issues
 
 If your device gets hit by a stray cosmic ray and the application breaks.. please create an [Issue](https://codeberg.org/arran/qcard/issues).
 
+
+# Development
+
+## Development Server (HTTP)
+
+```shell
+npm run dev
+```
+
+## Serving with HTTPS
+
+Add `qcard.localdomain` to `/etc/hosts`
+
+### mkcert - HTTPS Certificates
+
+Install `mkcert` and create a certificate.
+
+```shell
+mkcert -install
+
+cd ./certs/
+mkcert qcard.localdomain localhost 127.0.0.1 ::1 192.168.1.120
+```
+
+### Caddy - Reverse Proxy
+
+In order to test PWA functionality, the WebApp must be served via `https`.
+
+Caddy serves the WebApp with the newly created certificates and exposes on port `8080` 
+
+```shell
+sudo caddy run
+```
+
+### Testing on LAN devices
+
+If your system uses `ufw` to manange its firewall, execute the following command to expose port `8080` to all devices on your LAN.
+
+```
+sudo ufw allow 8080 from 192.168.1.0/24 to any port 8080
+```
