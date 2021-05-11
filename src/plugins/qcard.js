@@ -24,7 +24,8 @@ class QCard {
         website,
         comment,
         address,
-        xmpp
+        xmpp,
+        telegram
     ) {
         this.name = name
         this.title = title
@@ -34,6 +35,7 @@ class QCard {
         this.comment = comment
         this.address = address
         this.xmpp = xmpp
+        this.telegram = telegram
     }
 
     toViewUrl() {
@@ -71,6 +73,7 @@ class QCard {
         this.setComment(vCard)
         this.setAddress(vCard)
         this.setXmpp(vCard)
+        this.setTelegram(vCard)
         return vCard
     }
 
@@ -106,10 +109,13 @@ class QCard {
 
     setXmpp(vCard) {
         this.setProperty(vCard, 'X-JABBER', this.xmpp)
+        this.setProperty(vCard, 'IMPP', "xmpp:" + this.xmpp)
     }
 
+    setTelegram(vCard) {
+        this.setProperty(vCard, "X-TELEGRAM", this.telegram)
+        this.setProperty(vCard, "IMPP", "tg://resolve?domain=" + this.telegram)
+    }
 }
 
 export default QCard
-
-

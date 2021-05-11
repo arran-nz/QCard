@@ -44,6 +44,7 @@ export function fromVCard(vCard) {
         getVCardProperty(vCard, "note"),
         getVCardProperty(vCard, "adr"),
         getVCardProperty(vCard, "X-JABBER"),
+        getVCardProperty(vCard, "X-TELEGRAM")
     )
 }
 

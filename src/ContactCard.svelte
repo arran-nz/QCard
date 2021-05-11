@@ -200,7 +200,7 @@
 		</div>
 
 
-		{#if qCard.email || qCard.phone || qCard.website || qCard.address || qCard.xmpp}
+		{#if qCard.email || qCard.phone || qCard.website || qCard.address || qCard.xmpp || qCard.telegram}
 		<div class="contact-methods">
 			{#if qCard.email}
 			<div class="contact-method-item">
@@ -222,6 +222,14 @@
 			<div class="contact-method-item">
 				<a href="xmpp:{qCard.xmpp}" target="_blank" alt="{qCard.xmpp}">
 					<img src="/icons/xmpp.svg" alt="XMPP icon"/>
+				</a>
+			</div>
+			{/if}
+
+			{#if qCard.telegram}
+			<div class="contact-method-item">
+				<a href="tg://resolve?domain={qCard.telegram}" target="_blank" alt="{qCard.telegram}">
+					<img src="/icons/telegram.svg" alt="Telegram icon"/>
 				</a>
 			</div>
 			{/if}
