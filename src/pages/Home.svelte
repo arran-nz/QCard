@@ -62,11 +62,11 @@
     <div class="flex-container">
         <div class="explaination">
             <h1>What is <strong>QCard</strong></h1>
-            <p>QCard is a beautifully <strong>simple</strong> way to share contact information on-the-go.</p>
+            <p>QCard is a <strong>simple</strong> way to share contact information on-the-go.</p>
             <ul>
-                <li>🛡️ Completely <strong>private</strong> by design - All contact data is in the QR code</li>
-                <li>💚 An alternative to Business Cards that is <strong>waste-free</strong></li>
-                <li>⚡ Super <strong>light-weight</strong>, optimzed for cellular internet</li>
+                <li>🛡️ Completely <strong>private</strong> by design - Information never leaves the browser</li>
+                <li>💚 A  <strong>waste-free</strong> alternative to Business Cards</li>
+                <li>⚡ Super <strong>light-weight</strong>, optimised for mobile internet</li>
             </ul>    
             
             <a use:link href="/create" class="bold button">Create a QCard</a>
