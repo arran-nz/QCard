@@ -1,3 +1,5 @@
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F3FW513)
+
 # [QCard](https://qcard.link)
 
 QCard is a beautifully simple way to share contact information, here's why you should care:
